@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+
+const posts = (await getCollection('posts')).sort((a, b) => Date.parse(b.data.date) - Date.parse(a.data.date));
+const recentPosts = posts.slice(0, 12);
+---
+
+<BaseLayout>
+  <section class="intro">
+    <p class="eyebrow">Since 2008</p>
+    <h1>Notes on systems, software, and data.</h1>
+    <p>Practical guides, troubleshooting records, and technical experiments from DiaryFolio.</p>
+    <div class="home-meta"><span>{posts.length} articles</span><span>Long-running technical archive</span><a href="/search.html">Search the archive →</a></div>
+  </section>
+  <section aria-labelledby="latest-heading">
+    <div class="section-heading"><p class="eyebrow">Recently published</p><h2 id="latest-heading">Latest articles</h2><a href="/archive.html">View all →</a></div>
+    <div class="post-list">
+      {recentPosts.map((post) => <PostCard post={post} />)}
+    </div>
+  </section>
+</BaseLayout>

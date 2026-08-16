@@ -1,0 +1,19 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props { post: CollectionEntry<'posts'>; }
+const { post } = Astro.props;
+const date = new Date(post.data.date);
+const imageMatch = post.body?.match(/<img[^>]+src=["']([^"']+)["']/i);
+const imageSrc = imageMatch?.[1];
+const visibleLabels = post.data.labels.slice(0, 3);
+const hiddenLabelCount = post.data.labels.length - visibleLabels.length;
+---
+
+<article class="post-card">
+  {imageSrc && <a class="post-card-media" href={post.data.legacy_url} tabindex="-1" aria-hidden="true"><img src={imageSrc} alt="" loading="lazy" /></a>}
+  <p class="eyebrow"><time datetime={post.data.date}>{date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })}</time></p>
+  <h2><a href={post.data.legacy_url}>{post.data.title}</a></h2>
+  {post.data.description && <p>{post.data.description}</p>}
+  {visibleLabels.length > 0 && <p class="tags">{visibleLabels.map((label) => <span>{label}</span>)}{hiddenLabelCount > 0 && <span class="tag-more">+{hiddenLabelCount}</span>}</p>}
+</article>

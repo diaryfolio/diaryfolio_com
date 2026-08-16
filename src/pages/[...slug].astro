@@ -1,0 +1,80 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AdSlot from '../components/AdSlot.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => ({ params: { slug: post.data.legacy_url.slice(1, -5) }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const date = new Date(post.data.date);
+const readingWords = (post.body ?? '').replace(/<[^>]*>/g, ' ').split(/\s+/).filter(Boolean).length;
+const readingMinutes = Math.max(1, Math.ceil(readingWords / 220));
+const visibleLabels = post.data.labels.slice(0, 6);
+const hiddenLabelCount = post.data.labels.length - visibleLabels.length;
+const articleUrl = new URL(post.data.legacy_url, Astro.site ?? 'https://diaryfolio.com').href;
+const articleStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.date,
+  dateModified: post.data.updated ?? post.data.date,
+  author: { '@type': 'Person', name: post.data.author ?? 'DiaryFolio' },
+  mainEntityOfPage: articleUrl,
+  url: articleUrl
+};
+---
+
+<BaseLayout title={post.data.title} description={post.data.description ?? `DiaryFolio article: ${post.data.title}`} type="article" structuredData={articleStructuredData}>
+  <article class="article">
+    <header>
+      <p class="eyebrow"><time datetime={post.data.date}>{date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })}</time>{post.data.author && ` · ${post.data.author}`} · {readingMinutes} min read</p>
+      <h1>{post.data.title}</h1>
+      {visibleLabels.length > 0 && <p class="tags">{visibleLabels.map((label) => <span>{label}</span>)}{hiddenLabelCount > 0 && <span class="tag-more">+{hiddenLabelCount}</span>}</p>}
+    </header>
+    <div class="prose"><Content /></div>
+    <AdSlot slot={import.meta.env.PUBLIC_ADSENSE_ARTICLE_SLOT ?? ''} format="fluid" />
+  </article>
+  <script>
+    document.querySelectorAll('.prose pre').forEach((pre) => {
+      const codeText = (pre.textContent ?? '').trim();
+      pre.textContent = codeText;
+      const block = document.createElement('div');
+      block.className = 'code-block';
+      const toolbar = document.createElement('div');
+      toolbar.className = 'code-toolbar';
+      const label = document.createElement('span');
+      label.textContent = 'Snippet';
+      const actions = document.createElement('span');
+      actions.className = 'code-actions';
+      const copy = document.createElement('button');
+      copy.className = 'code-copy';
+      copy.type = 'button';
+      copy.textContent = 'Copy';
+      copy.addEventListener('click', async () => {
+        try { await navigator.clipboard.writeText(codeText); copy.textContent = 'Copied'; } catch { copy.textContent = 'Select and copy'; }
+        window.setTimeout(() => { copy.textContent = 'Copy'; }, 1400);
+      });
+      actions.append(copy);
+      if (codeText.length > 280 || codeText.split('\n').length > 10) {
+        pre.classList.add('code-collapsed');
+        const toggle = document.createElement('button');
+        toggle.className = 'code-toggle';
+        toggle.type = 'button';
+        toggle.textContent = 'Expand';
+        toggle.addEventListener('click', () => {
+          const expanded = pre.classList.toggle('code-expanded');
+          toggle.textContent = expanded ? 'Collapse' : 'Expand';
+        });
+        actions.prepend(toggle);
+      }
+      toolbar.append(label, actions);
+      pre.replaceWith(block);
+      block.append(toolbar, pre);
+    });
+  </script>
+</BaseLayout>
