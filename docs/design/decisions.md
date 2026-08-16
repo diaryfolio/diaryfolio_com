@@ -47,3 +47,13 @@ This log records material decisions. The linked design documents describe the fu
 **Decision:** Keep the original `public/favicon.ico`, use the apex canonical domain, and preserve the migrated `.html` routes.
 
 **Why:** These choices retain the site's identity, backlinks, bookmarks, and search history.
+
+## D-006 — Build artifacts are not versioned
+
+**Status:** Accepted
+
+**Decision:** Keep `node_modules/` and `dist/` untracked, ignored by `.gitignore`. The GitHub Pages workflow is the only producer of `dist/`.
+
+**Why:** Committed dependencies and build output inflate the repository history and increase the risk of accidentally committing a real credential; the locked `npm ci` workflow already provides a reproducible build.
+
+**Details:** [GitHub Pages with Cloudflare DNS](github-pages-cloudflare.md)

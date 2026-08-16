@@ -16,6 +16,8 @@ Cloudflare remains the registrar/DNS and security control plane. GitHub Pages be
 4. GitHub deploys the artifact to the `github-pages` environment.
 5. `public/CNAME` is copied into the artifact as `CNAME`, preserving `diaryfolio.com`.
 
+`node_modules/` and `dist/` are build artifacts and are ignored by `.gitignore`; they are never versioned. The locked `npm ci` plus `npm run build` steps in the workflow are the only producer of `dist/`, so every deployment reflects an installed, reproducible build.
+
 ## Repository settings
 
 In **Settings → Pages**:
