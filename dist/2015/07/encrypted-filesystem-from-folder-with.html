@@ -1,0 +1,96 @@
+<!DOCTYPE html><html lang="en"><head><script>
+      try {
+        const savedTheme = localStorage.getItem('diaryfolio-theme');
+        if (savedTheme === 'dark' || (!savedTheme && matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.dataset.theme = 'dark';
+        }
+      } catch {}
+    </script><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f5f7f8" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#10171c" media="(prefers-color-scheme: dark)"><meta name="description" content="DiaryFolio article: Encrypted Filesystem - Virtual filesystem with folder, file and content encryption"><link rel="canonical" href="https://diaryfolio.com/2015/07/encrypted-filesystem-from-folder-with.html"><meta property="og:type" content="article"><meta property="og:site_name" content="DiaryFolio"><meta property="og:title" content="Encrypted Filesystem - Virtual filesystem with folder, file and content encryption · DiaryFolio"><meta property="og:description" content="DiaryFolio article: Encrypted Filesystem - Virtual filesystem with folder, file and content encryption"><meta property="og:url" content="https://diaryfolio.com/2015/07/encrypted-filesystem-from-folder-with.html"><meta property="og:locale" content="en_GB"><meta name="twitter:card" content="summary"><link rel="alternate" type="application/rss+xml" title="DiaryFolio RSS" href="/rss.xml"><link rel="sitemap" href="/sitemap.xml"><link rel="icon" href="/favicon.ico"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"DiaryFolio","url":"https://diaryfolio.com/","potentialAction":{"@type":"SearchAction","target":"https://diaryfolio.com/search.html?q={search_term_string}","query-input":"required name=search_term_string"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Encrypted Filesystem - Virtual filesystem with folder, file and content encryption","datePublished":"2015-07-31T13:22:00.001Z","dateModified":"2015-07-31T13:51:39.494Z","author":{"@type":"Person","name":"df"},"mainEntityOfPage":"https://diaryfolio.com/2015/07/encrypted-filesystem-from-folder-with.html","url":"https://diaryfolio.com/2015/07/encrypted-filesystem-from-folder-with.html"}</script><title>Encrypted Filesystem - Virtual filesystem with folder, file and content encryption · DiaryFolio</title><link rel="stylesheet" href="/_astro/BaseLayout.DuKjOxZC.css"></head><body><a class="skip-link" href="#main-content">Skip to content</a><header class="site-header"><div class="shell header-inner"><a class="brand" href="/" aria-label="DiaryFolio home"><span class="brand-mark" aria-hidden="true">D</span><span>DiaryFolio</span></a><nav aria-label="Primary navigation"><a href="/" aria-current="page">Articles</a><a href="/archive.html">Archive</a><a href="/search.html">Search</a><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false" title="Toggle colour theme">◐</button></nav></div></header><main id="main-content" class="shell" tabindex="-1"><article class="article"><header><p class="eyebrow"><time datetime="2015-07-31T13:22:00.001Z">31 July 2015</time> · df · 1 min read</p><h1>Encrypted Filesystem - Virtual filesystem with folder, file and content encryption</h1><p class="tags"><span>security</span><span>password</span><span>encryption</span><span>encfs</span><span>linux</span></p></header><div class="prose"><div dir="ltr" trbidi="on">
+Linux is wonderful when it comes to security aspects and data protection. My challenge was<br />
+<br />
+<ul>
+<li>Laptop having personal details in files and folders</li>
+<li>Have to encrypt these data so that if laptop is lost, the data shouldn't be replicated</li>
+<li>Have to use "git" to backup the data normally and version it</li>
+</ul>
+<div>
+<h3>
+Solution for Linux</h3>
+</div>
+<div>
+<h4>
+<u>
+Design your folder/directory structure</u></h4>
+</div>
+<div>
+<a href="/assets/images/original/2015/07/encrypted-filesystem-from-folder-with/padlock.jpg" imageanchor="1"><img border="0" height="200" src="/assets/images/original/2015/07/encrypted-filesystem-from-folder-with/padlock.jpg" width="200" /></a><br />
+<ul>
+<li>Ensure that all your personal files are well structured</li>
+<li>Ensure all files are put into a single directory/folder hierarchy &nbsp;(eg "/home/myuser/personal/")</li>
+</ul>
+<div>
+<h4>
+<u>
+Setting up encfs</u></h4>
+</div>
+<div>
+In Ubuntu, run&nbsp;</div>
+</div>
+<br />
+<pre>sudo apt-get install encfs</pre>
+<div>
+<h4>
+<u>Encrypted Directory and Mount location</u></h4>
+</div>
+<div>
+<code>
+encDir="/home/diaryfolio/Docs/encr" # Where encrypted files are stored</code></div>
+mntDir="/home/diaryfolio/Docs/mydocs" # Mount created<br />
+<div>
+<div>
+<br /></div>
+<div>
+# Create encrypted directory and mount directory</div>
+<div>
+<code>encfs $encDir $mntDir</code></div>
+</div>
+<div>
+<br /></div>
+<div>
+# Press Enter which uses default encryption</div>
+<div>
+# Provide a strong password and REMEMBER it in future</div>
+<div>
+<br /></div>
+<div>
+# Copy content/files/directories to $mntDir once you mount it</div>
+<div>
+<br /></div>
+<div>
+# Unmount $mntDir afterwards</div>
+<div>
+<code>fusermount -u $mntDir</code></div>
+<div>
+<br /></div>
+<div>
+# You can now only see $encDir &nbsp;and encrypted files</div>
+<div>
+<br /></div>
+<div>
+# To remount and view files in plain format. It will ask you for your password</div>
+<div>
+<code>encfs $encDir $mntDir</code></div>
+<div>
+</div>
+</div>
+</div></article><script type="module">document.querySelectorAll(`.prose pre`).forEach(e=>{let t=(e.textContent??``).trim();e.textContent=t;let n=document.createElement(`div`);n.className=`code-block`;let r=document.createElement(`div`);r.className=`code-toolbar`;let i=document.createElement(`span`);i.textContent=`Snippet`;let a=document.createElement(`span`);a.className=`code-actions`;let o=document.createElement(`button`);if(o.className=`code-copy`,o.type=`button`,o.textContent=`Copy`,o.addEventListener(`click`,async()=>{try{await navigator.clipboard.writeText(t),o.textContent=`Copied`}catch{o.textContent=`Select and copy`}window.setTimeout(()=>{o.textContent=`Copy`},1400)}),a.append(o),t.length>280||t.split(`
+`).length>10){e.classList.add(`code-collapsed`);let t=document.createElement(`button`);t.className=`code-toggle`,t.type=`button`,t.textContent=`Expand`,t.addEventListener(`click`,()=>{let n=e.classList.toggle(`code-expanded`);t.textContent=n?`Collapse`:`Expand`}),a.prepend(t)}r.append(i,a),e.replaceWith(n),n.append(r,e)});</script></main><footer class="site-footer"><div class="shell">DiaryFolio · Technical notes since 2008</div></footer><script>
+      const themeToggle = document.querySelector('#theme-toggle');
+      const setTheme = (theme) => {
+        document.documentElement.dataset.theme = theme;
+        try { localStorage.setItem('diaryfolio-theme', theme); } catch {}
+        themeToggle?.setAttribute('aria-pressed', String(theme === 'dark'));
+      };
+      themeToggle?.addEventListener('click', () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
+      themeToggle?.setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
+    </script></body></html>

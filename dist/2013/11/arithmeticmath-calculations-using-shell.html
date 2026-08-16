@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="en"><head><script>
+      try {
+        const savedTheme = localStorage.getItem('diaryfolio-theme');
+        if (savedTheme === 'dark' || (!savedTheme && matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.dataset.theme = 'dark';
+        }
+      } catch {}
+    </script><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f5f7f8" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#10171c" media="(prefers-color-scheme: dark)"><meta name="description" content="DiaryFolio article: Arithmetic/Math calculations using shell script &amp;amp; Perl"><link rel="canonical" href="https://diaryfolio.com/2013/11/arithmeticmath-calculations-using-shell.html"><meta property="og:type" content="article"><meta property="og:site_name" content="DiaryFolio"><meta property="og:title" content="Arithmetic/Math calculations using shell script &amp;amp; Perl · DiaryFolio"><meta property="og:description" content="DiaryFolio article: Arithmetic/Math calculations using shell script &amp;amp; Perl"><meta property="og:url" content="https://diaryfolio.com/2013/11/arithmeticmath-calculations-using-shell.html"><meta property="og:locale" content="en_GB"><meta name="twitter:card" content="summary"><link rel="alternate" type="application/rss+xml" title="DiaryFolio RSS" href="/rss.xml"><link rel="sitemap" href="/sitemap.xml"><link rel="icon" href="/favicon.ico"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"DiaryFolio","url":"https://diaryfolio.com/","potentialAction":{"@type":"SearchAction","target":"https://diaryfolio.com/search.html?q={search_term_string}","query-input":"required name=search_term_string"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Arithmetic/Math calculations using shell script &amp; Perl","datePublished":"2013-11-18T10:29:00Z","dateModified":"2014-11-20T23:58:11.424Z","author":{"@type":"Person","name":"df"},"mainEntityOfPage":"https://diaryfolio.com/2013/11/arithmeticmath-calculations-using-shell.html","url":"https://diaryfolio.com/2013/11/arithmeticmath-calculations-using-shell.html"}</script><title>Arithmetic/Math calculations using shell script &amp;amp; Perl · DiaryFolio</title><link rel="stylesheet" href="/_astro/BaseLayout.DuKjOxZC.css"></head><body><a class="skip-link" href="#main-content">Skip to content</a><header class="site-header"><div class="shell header-inner"><a class="brand" href="/" aria-label="DiaryFolio home"><span class="brand-mark" aria-hidden="true">D</span><span>DiaryFolio</span></a><nav aria-label="Primary navigation"><a href="/" aria-current="page">Articles</a><a href="/archive.html">Archive</a><a href="/search.html">Search</a><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false" title="Toggle colour theme">◐</button></nav></div></header><main id="main-content" class="shell" tabindex="-1"><article class="article"><header><p class="eyebrow"><time datetime="2013-11-18T10:29:00Z">18 November 2013</time> · df · 1 min read</p><h1>Arithmetic/Math calculations using shell script &amp;amp; Perl</h1><p class="tags"><span>Technology</span></p></header><div class="prose"><div dir="ltr" trbidi="on">
+Unix Shell scripts are perfect when it comes to simple automation tasks. But the in-built calculations are quite poor compared to rest of its functionality. The main issues I've faced using out-of-box shell script functions like expr, bc, echo are<br />
+<ul><br />
+<li>Unable to calculate decimal places correctly</li>
+<br />
+<li>Error handling very poor (even divide by 0) and goes out of control.</li>
+<br />
+<li>Hard to control precision</li>
+<br />
+<li>Escape characters and regex increases complexity with formula</li>
+</ul>
+<br />
+Object Oriented programs like Java/Python/.NET are excellent for arithmetic calculations. But this involves another level of coding and program installation. The trick I used is to use PERL which is built in almost all *nix distributions. Some of the advantages of using PERL within shell script are<br />
+<ul><br />
+<li>Easy to embed Perl commands into shell scripts</li>
+<br />
+<li>Most of *nix distro have PERL inbuilt</li>
+<br />
+<li>Reduced regex or escape character usage</li>
+<br />
+<li>Can put formulae into config file and can loop them into the shell script</li>
+<br />
+<li>precision, error handling are much better</li>
+</ul>
+<h3>
+How to do math calculations in shell scripts</h3>
+<ul><br />
+<li>Write your shell script and put a function to do the real formula calculation</li>
+<br />
+<li>Use perl command line (-e) within shell script</li>
+</ul>
+<br />
+<pre>perl -le 'printf "%.0f", eval"@ARGV"' "($VAL2-$VAL1)"</pre>
+<br />
+The above calculation will subtrace $VAL1 from $VAL2 and print with no decimal places (0f). The precision can be easily manipulated by changing the printf</div>
+</div></article><script type="module">document.querySelectorAll(`.prose pre`).forEach(e=>{let t=(e.textContent??``).trim();e.textContent=t;let n=document.createElement(`div`);n.className=`code-block`;let r=document.createElement(`div`);r.className=`code-toolbar`;let i=document.createElement(`span`);i.textContent=`Snippet`;let a=document.createElement(`span`);a.className=`code-actions`;let o=document.createElement(`button`);if(o.className=`code-copy`,o.type=`button`,o.textContent=`Copy`,o.addEventListener(`click`,async()=>{try{await navigator.clipboard.writeText(t),o.textContent=`Copied`}catch{o.textContent=`Select and copy`}window.setTimeout(()=>{o.textContent=`Copy`},1400)}),a.append(o),t.length>280||t.split(`
+`).length>10){e.classList.add(`code-collapsed`);let t=document.createElement(`button`);t.className=`code-toggle`,t.type=`button`,t.textContent=`Expand`,t.addEventListener(`click`,()=>{let n=e.classList.toggle(`code-expanded`);t.textContent=n?`Collapse`:`Expand`}),a.prepend(t)}r.append(i,a),e.replaceWith(n),n.append(r,e)});</script></main><footer class="site-footer"><div class="shell">DiaryFolio · Technical notes since 2008</div></footer><script>
+      const themeToggle = document.querySelector('#theme-toggle');
+      const setTheme = (theme) => {
+        document.documentElement.dataset.theme = theme;
+        try { localStorage.setItem('diaryfolio-theme', theme); } catch {}
+        themeToggle?.setAttribute('aria-pressed', String(theme === 'dark'));
+      };
+      themeToggle?.addEventListener('click', () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
+      themeToggle?.setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
+    </script></body></html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="en"><head><script>
+      try {
+        const savedTheme = localStorage.getItem('diaryfolio-theme');
+        if (savedTheme === 'dark' || (!savedTheme && matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.dataset.theme = 'dark';
+        }
+      } catch {}
+    </script><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f5f7f8" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#10171c" media="(prefers-color-scheme: dark)"><meta name="description" content="DiaryFolio article: AWS Lambda: Function to stream logs via SQS"><link rel="canonical" href="https://diaryfolio.com/2022/01/aws-lambda-function-to-stream-logs-via.html"><meta property="og:type" content="article"><meta property="og:site_name" content="DiaryFolio"><meta property="og:title" content="AWS Lambda: Function to stream logs via SQS · DiaryFolio"><meta property="og:description" content="DiaryFolio article: AWS Lambda: Function to stream logs via SQS"><meta property="og:url" content="https://diaryfolio.com/2022/01/aws-lambda-function-to-stream-logs-via.html"><meta property="og:locale" content="en_GB"><meta name="twitter:card" content="summary"><link rel="alternate" type="application/rss+xml" title="DiaryFolio RSS" href="/rss.xml"><link rel="sitemap" href="/sitemap.xml"><link rel="icon" href="/favicon.ico"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"DiaryFolio","url":"https://diaryfolio.com/","potentialAction":{"@type":"SearchAction","target":"https://diaryfolio.com/search.html?q={search_term_string}","query-input":"required name=search_term_string"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AWS Lambda: Function to stream logs via SQS","datePublished":"2022-01-01T22:55:00.007Z","dateModified":"2022-01-21T11:00:19.644Z","author":{"@type":"Person","name":"df"},"mainEntityOfPage":"https://diaryfolio.com/2022/01/aws-lambda-function-to-stream-logs-via.html","url":"https://diaryfolio.com/2022/01/aws-lambda-function-to-stream-logs-via.html"}</script><title>AWS Lambda: Function to stream logs via SQS · DiaryFolio</title><link rel="stylesheet" href="/_astro/BaseLayout.DuKjOxZC.css"></head><body><a class="skip-link" href="#main-content">Skip to content</a><header class="site-header"><div class="shell header-inner"><a class="brand" href="/" aria-label="DiaryFolio home"><span class="brand-mark" aria-hidden="true">D</span><span>DiaryFolio</span></a><nav aria-label="Primary navigation"><a href="/" aria-current="page">Articles</a><a href="/archive.html">Archive</a><a href="/search.html">Search</a><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false" title="Toggle colour theme">◐</button></nav></div></header><main id="main-content" class="shell" tabindex="-1"><article class="article"><header><p class="eyebrow"><time datetime="2022-01-01T22:55:00.007Z">1 January 2022</time> · df · 2 min read</p><h1>AWS Lambda: Function to stream logs via SQS</h1><p class="tags"><span>logstash</span><span>lambda</span><span>sqs</span><span>siem</span><span>aws</span></p></header><div class="prose"><h2>Summary</h2><p>As part of logging and monitoring strategy it is quite important to emit data from AWS services to another service or system or aggregation layer. <a href="https://aws.amazon.com/sqs/" target="_blank">AWS SQS </a>(Amazon Simple Queue Service) is a great tool to communicate between such micro-services with real-time &amp; between software components at any volume.</p><p>Aim of this article is a snippet to stream logs via SQS to an external service (like logstash or siem tools) using Lambda Function</p><h2>Pre-Reqs</h2><p></p><ul><li>Permission to pull data from specific SQS queue</li></ul><p></p><h2>Steps</h2><p></p><ul><li>Ensure lambda function can reach the SQS queue</li><li>Below is a snippet of code to push the data in real-time</li></ul>
+<pre><code class="python">
+import gzip
+import json
+import base64
+import boto3
+import time
+<p>def lambda_handler(event, context):
+sqs = boto3.client(‘sqs’)
+account = boto3.client(‘sts’).get_caller_identity()[‘Account’]</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>queue_url = "https://sqs.eu-west-1.amazonaws.com/12345567928/my-app-{}.fifo".format(account)</span></span>
+<span class="line"><span>cw_data = event['awslogs']['data']</span></span>
+<span class="line"><span>compressed_payload = base64.b64decode(cw_data)</span></span>
+<span class="line"><span>uncompressed_payload = gzip.decompress(compressed_payload)</span></span>
+<span class="line"><span>payload = json.loads(uncompressed_payload)</span></span>
+<span class="line"><span>log_events = payload['logEvents']</span></span>
+<span class="line"><span>log_group = payload['logGroup']</span></span>
+<span class="line"><span>log_stream = payload['logStream']</span></span>
+<span class="line"><span>event=    {}</span></span>
+<span class="line"><span>for log_event in log_events:</span></span>
+<span class="line"><span>    event['AccountID']=account</span></span>
+<span class="line"><span>    event['LogGroup']=log_group</span></span>
+<span class="line"><span>    event['LogStream']=log_stream</span></span>
+<span class="line"><span>    event['Log']=log_event</span></span>
+<span class="line"><span>    response = sqs.send_message(</span></span>
+<span class="line"><span>        QueueUrl=queue_url,</span></span>
+<span class="line"><span>        MessageGroupId="my_logging",</span></span>
+<span class="line"><span>        MessageDeduplicationId="%.20f" % time.time(),</span></span>
+<span class="line"><span>        MessageBody=json.dumps(event)</span></span>
+<span class="line"><span>    )</span></span></code></pre>
+</code>
+</pre>
+<ul><li>Now pull data using logstash or similar service</li></ul>
+<pre><code>
+input {
+      sqs {
+         queue =&gt; "MYQUEUENAME-SQS"
+         access_key_id =&gt; "ABCDEFGHIJK"
+         secret_access_key =&gt; "WW1123ABCDEFGHIJK"
+         region =&gt; "us-west-1"
+         proxy_uri =&gt; "https://10.20.30.40:1234"
+         id_field =&gt; "sqs_message_id"
+         sent_timestamp_field =&gt; "sqs_sent_timestamp"
+         add_field =&gt; { "[my][queue]" =&gt; "my-app-queue" }
+      }
+}
+<p>filter {</p>
+<p>}</p>
+<p>output {
+elasticsearch {
+hosts =&gt; “my_elastic_hostname”
+data_stream =&gt; “true”
+}
+}
+</code>
+</pre></p>
+<div>Please provide your feedback</div><div class="separator"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEheL67AeEQesFCnQbjYtAFsA_hfuGQpsfYx80UwSM0Z_o2I2aIIG18CEmR1S_1jxWpVJ9Eci65Ub5_AjlHH6nRi_QeWnBIuM9bWOBpUNvY8udWYix7bF34G5hKONL4hU6JRrqxWZFK498iRVX_Kn5YoTcYCpRKmfn-gSkcwJh2hvq_CGR8Phlz_RPGL=s1499"><img border="0" data-original-height="894" data-original-width="1499" height="239" src="https://blogger.googleusercontent.com/img/a/AVvXsEheL67AeEQesFCnQbjYtAFsA_hfuGQpsfYx80UwSM0Z_o2I2aIIG18CEmR1S_1jxWpVJ9Eci65Ub5_AjlHH6nRi_QeWnBIuM9bWOBpUNvY8udWYix7bF34G5hKONL4hU6JRrqxWZFK498iRVX_Kn5YoTcYCpRKmfn-gSkcwJh2hvq_CGR8Phlz_RPGL=w400-h239" width="400" /></a></div><br /><div><br /></div><p></p>
+</div></article><script type="module">document.querySelectorAll(`.prose pre`).forEach(e=>{let t=(e.textContent??``).trim();e.textContent=t;let n=document.createElement(`div`);n.className=`code-block`;let r=document.createElement(`div`);r.className=`code-toolbar`;let i=document.createElement(`span`);i.textContent=`Snippet`;let a=document.createElement(`span`);a.className=`code-actions`;let o=document.createElement(`button`);if(o.className=`code-copy`,o.type=`button`,o.textContent=`Copy`,o.addEventListener(`click`,async()=>{try{await navigator.clipboard.writeText(t),o.textContent=`Copied`}catch{o.textContent=`Select and copy`}window.setTimeout(()=>{o.textContent=`Copy`},1400)}),a.append(o),t.length>280||t.split(`
+`).length>10){e.classList.add(`code-collapsed`);let t=document.createElement(`button`);t.className=`code-toggle`,t.type=`button`,t.textContent=`Expand`,t.addEventListener(`click`,()=>{let n=e.classList.toggle(`code-expanded`);t.textContent=n?`Collapse`:`Expand`}),a.prepend(t)}r.append(i,a),e.replaceWith(n),n.append(r,e)});</script></main><footer class="site-footer"><div class="shell">DiaryFolio · Technical notes since 2008</div></footer><script>
+      const themeToggle = document.querySelector('#theme-toggle');
+      const setTheme = (theme) => {
+        document.documentElement.dataset.theme = theme;
+        try { localStorage.setItem('diaryfolio-theme', theme); } catch {}
+        themeToggle?.setAttribute('aria-pressed', String(theme === 'dark'));
+      };
+      themeToggle?.addEventListener('click', () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
+      themeToggle?.setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
+    </script></body></html>

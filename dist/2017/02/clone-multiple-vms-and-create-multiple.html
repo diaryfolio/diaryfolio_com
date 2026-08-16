@@ -1,0 +1,113 @@
+<!DOCTYPE html><html lang="en"><head><script>
+      try {
+        const savedTheme = localStorage.getItem('diaryfolio-theme');
+        if (savedTheme === 'dark' || (!savedTheme && matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.dataset.theme = 'dark';
+        }
+      } catch {}
+    </script><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f5f7f8" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#10171c" media="(prefers-color-scheme: dark)"><meta name="description" content="DiaryFolio article: Clone multiple VM's and create multiple VM's using vagrant"><link rel="canonical" href="https://diaryfolio.com/2017/02/clone-multiple-vms-and-create-multiple.html"><meta property="og:type" content="article"><meta property="og:site_name" content="DiaryFolio"><meta property="og:title" content="Clone multiple VM's and create multiple VM's using vagrant · DiaryFolio"><meta property="og:description" content="DiaryFolio article: Clone multiple VM's and create multiple VM's using vagrant"><meta property="og:url" content="https://diaryfolio.com/2017/02/clone-multiple-vms-and-create-multiple.html"><meta property="og:locale" content="en_GB"><meta name="twitter:card" content="summary"><link rel="alternate" type="application/rss+xml" title="DiaryFolio RSS" href="/rss.xml"><link rel="sitemap" href="/sitemap.xml"><link rel="icon" href="/favicon.ico"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"DiaryFolio","url":"https://diaryfolio.com/","potentialAction":{"@type":"SearchAction","target":"https://diaryfolio.com/search.html?q={search_term_string}","query-input":"required name=search_term_string"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Clone multiple VM's and create multiple VM's using vagrant","datePublished":"2017-02-04T16:23:00.004Z","dateModified":"2017-02-04T16:25:37.807Z","author":{"@type":"Person","name":"df"},"mainEntityOfPage":"https://diaryfolio.com/2017/02/clone-multiple-vms-and-create-multiple.html","url":"https://diaryfolio.com/2017/02/clone-multiple-vms-and-create-multiple.html"}</script><title>Clone multiple VM&#39;s and create multiple VM&#39;s using vagrant · DiaryFolio</title><link rel="stylesheet" href="/_astro/BaseLayout.DuKjOxZC.css"></head><body><a class="skip-link" href="#main-content">Skip to content</a><header class="site-header"><div class="shell header-inner"><a class="brand" href="/" aria-label="DiaryFolio home"><span class="brand-mark" aria-hidden="true">D</span><span>DiaryFolio</span></a><nav aria-label="Primary navigation"><a href="/" aria-current="page">Articles</a><a href="/archive.html">Archive</a><a href="/search.html">Search</a><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false" title="Toggle colour theme">◐</button></nav></div></header><main id="main-content" class="shell" tabindex="-1"><article class="article"><header><p class="eyebrow"><time datetime="2017-02-04T16:23:00.004Z">4 February 2017</time> · df · 2 min read</p><h1>Clone multiple VM&#39;s and create multiple VM&#39;s using vagrant</h1><p class="tags"><span>virtual machine</span><span>virtualbox</span><span>devops</span><span>vm</span><span>vmware</span><span>vagrant</span></p></header><div class="prose"><div dir="ltr" trbidi="on">
+Vagrant is an excellent tool for automation and doing proof of concepts (POC's). In many of the POC's you might need cluster and vagrant can do the clustering in matter of minutes by cloning an existing VM and then making into multiple Virtual machines<br />
+<br />
+<div class="separator">
+<a href="/assets/images/original/2017/02/clone-multiple-vms-and-create-multiple/VagrantVBAnsible_diaryfolio.png" imageanchor="1"><img border="0" height="105" src="/assets/images/original/2017/02/clone-multiple-vms-and-create-multiple/VagrantVBAnsible_diaryfolio.png" width="400" /></a></div>
+<br />
+Assumption<br />
+<br />
+<ul>
+<li>You have basic idea of Linux &amp; vagrant</li>
+<li>we are going to use centos/7 for vagrant guest</li>
+<li>The host is Fedora25/Redhat/CentOs system. Can be easily done for ubuntu as well</li>
+</ul>
+<br />
+Let's see the overall Summary of what we are doing to do<br />
+<br />
+<ul>
+<li>create a working directory</li>
+<li>download and install virtualbox, then vagrant</li>
+<li>clean-up any unwanted boxes you have.</li>
+<li>putting the config file and provisioning</li>
+<li>Validating the nodes</li>
+</ul>
+<div>
+<br /></div>
+<h4>
+Creating a working Directory</h4>
+<div>
+sudo su -</div>
+<div>
+mkdir /opt/vagrantOps</div>
+<div>
+cd /opt/vagrantOps</div>
+<div>
+<br /></div>
+<h4>
+Download and Install vbox, vagrant to your host (Fedora 25)</h4>
+<div>
+vi /etc/yum.repos.d/virtualbox.repo &nbsp;# with contents as per <a href="http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo" target="_blank">Virtualbox recommendation</a></div>
+<br />
+<div>
+dnf install VirtualBox-5.1 &nbsp; # This will install vbox &nbsp;from above repo</div>
+<div>
+<div>
+dnf install vagrant &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# Vagrant core</div>
+<div>
+dnf install -y vagrant vagrant-libvirt libvirt-devel &nbsp; # Addons to vagrant</div>
+</div>
+<div>
+<br /></div>
+<h4>
+clean-up and purge (if you want to start from scratch)</h4>
+<div>
+vagrant box list &nbsp;# to check list of boxes available</div>
+<div>
+vagrant global-status # Will show all running and available VM's</div>
+<div>
+vagrant destroy -f ${id} &nbsp; # Note the id from above command and destroy them</div>
+<div>
+<br /></div>
+<h4>
+putting the config file and provision</h4>
+<div>
+vagrant init &nbsp; &nbsp; &nbsp; &nbsp;# Ensure you are in vagrantOps directory and will create&nbsp;Vagrantfile</div>
+<div>
+# Copy code from <a href="https://github.com/getkub/SplunkScriplets/blob/master/thirdparty/vagrant/multivms.vagrantfile" target="_blank">github repo</a>&nbsp; and paste it to&nbsp;Vagrantfile</div>
+<div class="separator">
+<a href="/assets/images/original/2017/02/clone-multiple-vms-and-create-multiple/vagrant.multipleVM.diaryfolio.jpg" imageanchor="1"><img border="0" height="345" src="/assets/images/original/2017/02/clone-multiple-vms-and-create-multiple/vagrant.multipleVM.diaryfolio.jpg" width="640" /></a></div>
+<div>
+# The config file will provision 4 VM nodes with sample node names</div>
+<div>
+<br /></div>
+<h4>
+Validating the nodes</h4>
+<div>
+<div>
+vagrant global-status # Will show all running and available VM's</div>
+</div>
+<div>
+vagrant ssh diaryfolio_vm1 &nbsp; # name of the VM1</div>
+<div>
+<div>
+vagrant ssh diaryfolio_vm2 &nbsp; # name of the VM2</div>
+</div>
+<div>
+<br /></div>
+<div>
+<br /></div>
+<br />
+<div>
+<br /></div>
+<br />
+<div>
+</div>
+</div>
+</div></article><script type="module">document.querySelectorAll(`.prose pre`).forEach(e=>{let t=(e.textContent??``).trim();e.textContent=t;let n=document.createElement(`div`);n.className=`code-block`;let r=document.createElement(`div`);r.className=`code-toolbar`;let i=document.createElement(`span`);i.textContent=`Snippet`;let a=document.createElement(`span`);a.className=`code-actions`;let o=document.createElement(`button`);if(o.className=`code-copy`,o.type=`button`,o.textContent=`Copy`,o.addEventListener(`click`,async()=>{try{await navigator.clipboard.writeText(t),o.textContent=`Copied`}catch{o.textContent=`Select and copy`}window.setTimeout(()=>{o.textContent=`Copy`},1400)}),a.append(o),t.length>280||t.split(`
+`).length>10){e.classList.add(`code-collapsed`);let t=document.createElement(`button`);t.className=`code-toggle`,t.type=`button`,t.textContent=`Expand`,t.addEventListener(`click`,()=>{let n=e.classList.toggle(`code-expanded`);t.textContent=n?`Collapse`:`Expand`}),a.prepend(t)}r.append(i,a),e.replaceWith(n),n.append(r,e)});</script></main><footer class="site-footer"><div class="shell">DiaryFolio · Technical notes since 2008</div></footer><script>
+      const themeToggle = document.querySelector('#theme-toggle');
+      const setTheme = (theme) => {
+        document.documentElement.dataset.theme = theme;
+        try { localStorage.setItem('diaryfolio-theme', theme); } catch {}
+        themeToggle?.setAttribute('aria-pressed', String(theme === 'dark'));
+      };
+      themeToggle?.addEventListener('click', () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
+      themeToggle?.setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
+    </script></body></html>

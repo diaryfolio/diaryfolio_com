@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="en"><head><script>
+      try {
+        const savedTheme = localStorage.getItem('diaryfolio-theme');
+        if (savedTheme === 'dark' || (!savedTheme && matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.dataset.theme = 'dark';
+        }
+      } catch {}
+    </script><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f5f7f8" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#10171c" media="(prefers-color-scheme: dark)"><meta name="description" content="DiaryFolio article: Putty Session automation and portability"><link rel="canonical" href="https://diaryfolio.com/2013/07/putty-session-automation-and-portability.html"><meta property="og:type" content="article"><meta property="og:site_name" content="DiaryFolio"><meta property="og:title" content="Putty Session automation and portability · DiaryFolio"><meta property="og:description" content="DiaryFolio article: Putty Session automation and portability"><meta property="og:url" content="https://diaryfolio.com/2013/07/putty-session-automation-and-portability.html"><meta property="og:locale" content="en_GB"><meta name="twitter:card" content="summary"><link rel="alternate" type="application/rss+xml" title="DiaryFolio RSS" href="/rss.xml"><link rel="sitemap" href="/sitemap.xml"><link rel="icon" href="/favicon.ico"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"DiaryFolio","url":"https://diaryfolio.com/","potentialAction":{"@type":"SearchAction","target":"https://diaryfolio.com/search.html?q={search_term_string}","query-input":"required name=search_term_string"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Putty Session automation and portability","datePublished":"2013-07-12T08:46:00Z","dateModified":"2015-06-03T09:32:50.928Z","author":{"@type":"Person","name":"df"},"mainEntityOfPage":"https://diaryfolio.com/2013/07/putty-session-automation-and-portability.html","url":"https://diaryfolio.com/2013/07/putty-session-automation-and-portability.html"}</script><title>Putty Session automation and portability · DiaryFolio</title><link rel="stylesheet" href="/_astro/BaseLayout.DuKjOxZC.css"></head><body><a class="skip-link" href="#main-content">Skip to content</a><header class="site-header"><div class="shell header-inner"><a class="brand" href="/" aria-label="DiaryFolio home"><span class="brand-mark" aria-hidden="true">D</span><span>DiaryFolio</span></a><nav aria-label="Primary navigation"><a href="/" aria-current="page">Articles</a><a href="/archive.html">Archive</a><a href="/search.html">Search</a><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false" title="Toggle colour theme">◐</button></nav></div></header><main id="main-content" class="shell" tabindex="-1"><article class="article"><header><p class="eyebrow"><time datetime="2013-07-12T08:46:00Z">12 July 2013</time> · df · 2 min read</p><h1>Putty Session automation and portability</h1><p class="tags"><span>putty session portability</span><span>portable putty</span><span>keepass putty</span><span>putty</span><span>Technology</span><span>session automation</span><span class="tag-more">+1</span></p></header><div class="prose"><div dir="ltr" trbidi="on">
+Hope you all have "Putty" as your favourite ssh client? For me too..&nbsp;&nbsp; But sometimes, I felt there are some issues when you are working with 100's of servers and multiple locations.&nbsp; This article will guide you to achieve<br />
+<ul>
+<li>Putty portability: by storing sessions in files rather than in windows Registry</li>
+<li>Automate creation of Putty sessions: &nbsp;No more manual entries one by one</li>
+<li>Consistent coloring of Putty sessions for team</li>
+<li>Consistent naming conventions for Putty sessions</li>
+<li>"Keepass" to putty integration: Password management and automated login</li>
+<li>Use "SuperPutty" to allow multiple putty sessions in a single Tab</li>
+</ul>
+<h3>
+Pre-requisite &nbsp;</h3>
+<h4>
+Full package available to download at end of this document</h4>
+<ul>
+<li>Basic knowledge of coding. Overall understanding of tools</li>
+<li>Portable Putty: Ability to store sessions to file (<a href="http://jakub.kotrla.net/putty/">http://jakub.kotrla.net/putty/</a>)</li>
+<li>Optional: AutoIT (<a href="http://www.autoitscript.com/site/autoit/">http://www.autoitscript.com/site/autoit/</a>) : For automation purpose in Windows PC's. (Alternatively *NIX env by writing a simple find-replace awk script)</li>
+<li>Optional: SuperPutty (<a href="http://code.google.com/p/superputty/">http://code.google.com/p/superputty/</a>) to allow tab access</li>
+<li>Optional: Keepass (<a href="http://keepass.info/">http://keepass.info/</a>) Password Management</li>
+</ul>
+<h3>
+What we are going to do (in a nutshell)</h3>
+<ul>
+<li>Create putty sessions in batch from a configuration file</li>
+<li>Configuration file format to contain IP address, hostname, Grouping etc..</li>
+<li>Store sessions and Portable putty in consistent directory path. Share it to entire team if required to bring consistency across your team.</li>
+<li>Link <em>Keepass</em> to use these saved sessions to allow manage password and login</li>
+</ul>
+<h3>
+Step by Step guide</h3>
+<ul>
+<li>Download the package as given below of this document.</li>
+<li>Unzip all the conents your local drive. (eg&nbsp; <em>C:\PuttyPortable\</em> )</li>
+<li>Configure "<em>putty.conf</em>" as per your needs</li>
+<li>Ensure you create "ses" and "hostkeys" directory as per "<em>putty.conf</em>"</li>
+<li>Create color for sessions. This can be created based on the "Environment". Like Red color for "PROD" environment. Put then into a directory (eg. <em>C:\PuttyPortable\SessionConfig</em> )</li>
+<li>Create Configuration file format to contain IP address, hostname, Grouping etc..&nbsp; (eg <em>C:\PuttyPortable\SessionConfig\ServerList.csv</em> )</li>
+<li>Provide the Putty Session Template file. Provide correct port number if required (eg: <em>C:\PuttyPortable\SessionConfig\Template.Txt</em>)</li>
+<li>I have created "<em>PuttySessionGenerator.au3</em>" automation script. Run it using "AutoIt3.exe"</li>
+<li>Running This would create sessions in "ses" directory (eg: <em>C:\PuttyPortable\ses</em> )</li>
+<li>Double click on your Putty (eg: <em>C:\PuttyPortable\putty.exe</em> ).</li>
+<li>This will load all the new sessions automatically.</li>
+<li>Link <em>Keepass</em> to use these saved sessions to allow manage password and lo-gins.&nbsp; Please use <a href="https://diaryfolio.com/2013/06/keepass-password-safe-bulk-actions.html" target="_blank">this guide</a></li>
+</ul>
+<h3>
+Download Package</h3>
+<a href="https://github.com/getkub/PuttyPortable" target="_blank">Download Code from GITHUB</a> (download by zip)<br />
+<br />
+<br />
+This article is also listed under:<br />
+<br />
+<ul>
+<li>Create Multiple Putty Sessions in one go</li>
+<li>Putty Sessions as files rather than in registry</li>
+<li>Bulk Create putty session connections</li>
+</ul>
+</div>
+</div></article><script type="module">document.querySelectorAll(`.prose pre`).forEach(e=>{let t=(e.textContent??``).trim();e.textContent=t;let n=document.createElement(`div`);n.className=`code-block`;let r=document.createElement(`div`);r.className=`code-toolbar`;let i=document.createElement(`span`);i.textContent=`Snippet`;let a=document.createElement(`span`);a.className=`code-actions`;let o=document.createElement(`button`);if(o.className=`code-copy`,o.type=`button`,o.textContent=`Copy`,o.addEventListener(`click`,async()=>{try{await navigator.clipboard.writeText(t),o.textContent=`Copied`}catch{o.textContent=`Select and copy`}window.setTimeout(()=>{o.textContent=`Copy`},1400)}),a.append(o),t.length>280||t.split(`
+`).length>10){e.classList.add(`code-collapsed`);let t=document.createElement(`button`);t.className=`code-toggle`,t.type=`button`,t.textContent=`Expand`,t.addEventListener(`click`,()=>{let n=e.classList.toggle(`code-expanded`);t.textContent=n?`Collapse`:`Expand`}),a.prepend(t)}r.append(i,a),e.replaceWith(n),n.append(r,e)});</script></main><footer class="site-footer"><div class="shell">DiaryFolio · Technical notes since 2008</div></footer><script>
+      const themeToggle = document.querySelector('#theme-toggle');
+      const setTheme = (theme) => {
+        document.documentElement.dataset.theme = theme;
+        try { localStorage.setItem('diaryfolio-theme', theme); } catch {}
+        themeToggle?.setAttribute('aria-pressed', String(theme === 'dark'));
+      };
+      themeToggle?.addEventListener('click', () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
+      themeToggle?.setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
+    </script></body></html>

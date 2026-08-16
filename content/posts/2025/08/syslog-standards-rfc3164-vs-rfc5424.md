@@ -1,0 +1,128 @@
+---
+title: "Syslog Standards: RFC3164 vs RFC5424"
+date: "2025-08-16T09:32:00.005Z"
+updated: "2025-08-16T10:15:30.001Z"
+legacy_url: "/2025/08/syslog-standards-rfc3164-vs-rfc5424.html"
+source_id: "tag:blogger.com,1999:blog-5931535581904587661.post-8161463871282411798"
+author: "df"
+labels:
+  - "Syslog"
+  - "Google"
+  - "Web Development"
+  - "Data"
+---
+
+<p>
+  This page provides a clear and concise comparison between the old syslog standard (RFC 3164) and the modern format (RFC 5424). Whether you're working with legacy systems or modern log management tools, understanding the differences in structure, features, and formatting helps ensure better log parsing, monitoring, and compliance across systems.
+</p>
+
+<h2>Comparison Table</h2>
+
+<table border="1" cellspacing="0" cellpadding="6" 
+      >
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>RFC3164 (Old Format)</th>
+      <th>RFC5424 (New Format)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Example</strong></td>
+      <td><code>&lt;35&gt;Oct 12 22:14:15 client_machine su: 'su root' failed...</code></td>
+      <td><code>&lt;35&gt;1 2013-10-11T22:14:15.003Z client_machine su - - - 'su root' failed...</code></td>
+    </tr>
+    <tr>
+      <td><strong>Timestamp</strong></td>
+      <td>BSD-style (no year, no timezone)</td>
+      <td>ISO-8601 with milliseconds and timezone</td>
+    </tr>
+    <tr>
+      <td><strong>Priority Field</strong></td>
+      <td>Numeric value <code>&lt;Facility * 8 + Severity&gt;</code></td>
+      <td>Same as RFC3164</td>
+    </tr>
+    <tr>
+      <td><strong>Hostname</strong></td>
+      <td><code>client_machine</code></td>
+      <td><code>client_machine</code></td>
+    </tr>
+    <tr>
+      <td><strong>Structured Data</strong></td>
+      <td>Not supported</td>
+      <td>Supported (e.g. <code>[exampleSDID@32473 iut="3"]</code>)</td>
+    </tr>
+    <tr>
+      <td><strong>Max Length</strong></td>
+      <td>~1024 bytes (typical)</td>
+      <td>Configurable, supports larger payloads</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h2>Syslog Priority Matrix: Facility × Severity</h2>
+
+<table border="1" cellspacing="0" cellpadding="6" 
+      >
+  <thead>
+    <tr>
+      <th>Facility-Severity</th>
+      <th>0<br>Emergency</th>
+      <th>1<br>Alert</th>
+      <th>2<br>Critical</th>
+      <th>3<br>Error</th>
+      <th>4<br>Warning</th>
+      <th>5<br>Notice</th>
+      <th>6<br>Informational</th>
+      <th>7<br>Debug</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>0 - Kernel</strong></td>      <td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr>
+    <tr><td><strong>1 - User</strong></td>        <td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td></tr>
+    <tr><td><strong>2 - Mail</strong></td>        <td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td></tr>
+    <tr><td><strong>3 - Daemon</strong></td>      <td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr>
+    <tr><td><strong>4 - Auth</strong></td>        <td>32</td><td>33</td><td>34</td><td>35</td><td>36</td><td>37</td><td>38</td><td>39</td></tr>
+    <tr><td><strong>5 - Syslog</strong></td>      <td>40</td><td>41</td><td>42</td><td>43</td><td>44</td><td>45</td><td>46</td><td>47</td></tr>
+    <tr><td><strong>6 - LPR</strong></td>          <td>48</td><td>49</td><td>50</td><td>51</td><td>52</td><td>53</td><td>54</td><td>55</td></tr>
+    <tr><td><strong>7 - News</strong></td>         <td>56</td><td>57</td><td>58</td><td>59</td><td>60</td><td>61</td><td>62</td><td>63</td></tr>
+    <tr><td><strong>8 - UUCP</strong></td>         <td>64</td><td>65</td><td>66</td><td>67</td><td>68</td><td>69</td><td>70</td><td>71</td></tr>
+    <tr><td><strong>9 - Cron</strong></td>         <td>72</td><td>73</td><td>74</td><td>75</td><td>76</td><td>77</td><td>78</td><td>79</td></tr>
+    <tr><td><strong>10 - AuthPriv</strong></td>    <td>80</td><td>81</td><td>82</td><td>83</td><td>84</td><td>85</td><td>86</td><td>87</td></tr>
+    <tr><td><strong>11 - FTP</strong></td>         <td>88</td><td>89</td><td>90</td><td>91</td><td>92</td><td>93</td><td>94</td><td>95</td></tr>
+    <tr><td><strong>12 - NTP</strong></td>         <td>96</td><td>97</td><td>98</td><td>99</td><td>100</td><td>101</td><td>102</td><td>103</td></tr>
+    <tr><td><strong>13 - LogAudit</strong></td>    <td>104</td><td>105</td><td>106</td><td>107</td><td>108</td><td>109</td><td>110</td><td>111</td></tr>
+    <tr><td><strong>14 - LogAlert</strong></td>    <td>112</td><td>113</td><td>114</td><td>115</td><td>116</td><td>117</td><td>118</td><td>119</td></tr>
+    <tr><td><strong>15 - ClockDaemon</strong></td><td>120</td><td>121</td><td>122</td><td>123</td><td>124</td><td>125</td><td>126</td><td>127</td></tr>
+    <tr><td><strong>16 - Local0</strong></td>      <td>128</td><td>129</td><td>130</td><td>131</td><td>132</td><td>133</td><td>134</td><td>135</td></tr>
+    <tr><td><strong>17 - Local1</strong></td>      <td>136</td><td>137</td><td>138</td><td>139</td><td>140</td><td>141</td><td>142</td><td>143</td></tr>
+    <tr><td><strong>18 - Local2</strong></td>      <td>144</td><td>145</td><td>146</td><td>147</td><td>148</td><td>149</td><td>150</td><td>151</td></tr>
+    <tr><td><strong>19 - Local3</strong></td>      <td>152</td><td>153</td><td>154</td><td>155</td><td>156</td><td>157</td><td>158</td><td>159</td></tr>
+    <tr><td><strong>20 - Local4</strong></td>      <td>160</td><td>161</td><td>162</td><td>163</td><td>164</td><td>165</td><td>166</td><td>167</td></tr>
+    <tr><td><strong>21 - Local5</strong></td>      <td>168</td><td>169</td><td>170</td><td>171</td><td>172</td><td>173</td><td>174</td><td>175</td></tr>
+    <tr><td><strong>22 - Local6</strong></td>      <td>176</td><td>177</td><td>178</td><td>179</td><td>180</td><td>181</td><td>182</td><td>183</td></tr>
+    <tr><td><strong>23 - Local7</strong></td>      <td>184</td><td>185</td><td>186</td><td>187</td><td>188</td><td>189</td><td>190</td><td>191</td></tr>
+  </tbody>
+</table>
+
+
+<h2>Recommendation</h2>
+
+<p>
+  If your logging infrastructure supports RFC5424, it's generally recommended to adopt it due to its structured format, full timestamps with timezone info, and better compatibility with modern log aggregation tools like Splunk, Graylog, and Elasticsearch.
+</p>
+
+<h2>Reference Links</h2>
+
+<ul>
+  <li><a href="https://datatracker.ietf.org/doc/html/rfc3164" target="_blank">RFC3164 - The BSD Syslog Protocol</a></li>
+  <li><a href="https://datatracker.ietf.org/doc/html/rfc5424" target="_blank">RFC5424 - The Syslog Protocol</a></li>
+</ul>
+
+<div class="separator">
+  <a href="/assets/images/original/2025/08/syslog-standards-rfc3164-vs-rfc5424/what-is-syslog-and-how-does-it-work.webp">
+    <img src="/assets/images/original/2025/08/syslog-standards-rfc3164-vs-rfc5424/what-is-syslog-and-how-does-it-work.webp" width="320" border="0" alt="What is Syslog and how it works" />
+  </a>
+</div>

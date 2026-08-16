@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="en"><head><script>
+      try {
+        const savedTheme = localStorage.getItem('diaryfolio-theme');
+        if (savedTheme === 'dark' || (!savedTheme && matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.dataset.theme = 'dark';
+        }
+      } catch {}
+    </script><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f5f7f8" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#10171c" media="(prefers-color-scheme: dark)"><meta name="description" content="DiaryFolio article: Syslog Standards: A simple Comparison between RFC3164 &amp; RFC5424"><link rel="canonical" href="https://diaryfolio.com/2020/07/syslog-standards-simple-comparison.html"><meta property="og:type" content="article"><meta property="og:site_name" content="DiaryFolio"><meta property="og:title" content="Syslog Standards: A simple Comparison between RFC3164 &amp; RFC5424 · DiaryFolio"><meta property="og:description" content="DiaryFolio article: Syslog Standards: A simple Comparison between RFC3164 &amp; RFC5424"><meta property="og:url" content="https://diaryfolio.com/2020/07/syslog-standards-simple-comparison.html"><meta property="og:locale" content="en_GB"><meta name="twitter:card" content="summary"><link rel="alternate" type="application/rss+xml" title="DiaryFolio RSS" href="/rss.xml"><link rel="sitemap" href="/sitemap.xml"><link rel="icon" href="/favicon.ico"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"DiaryFolio","url":"https://diaryfolio.com/","potentialAction":{"@type":"SearchAction","target":"https://diaryfolio.com/search.html?q={search_term_string}","query-input":"required name=search_term_string"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Syslog Standards: A simple Comparison between RFC3164 & RFC5424","datePublished":"2020-07-18T18:37:00.009Z","dateModified":"2024-04-07T06:11:33.859Z","author":{"@type":"Person","name":"Kk"},"mainEntityOfPage":"https://diaryfolio.com/2020/07/syslog-standards-simple-comparison.html","url":"https://diaryfolio.com/2020/07/syslog-standards-simple-comparison.html"}</script><title>Syslog Standards: A simple Comparison between RFC3164 &amp; RFC5424 · DiaryFolio</title><link rel="stylesheet" href="/_astro/BaseLayout.DuKjOxZC.css"></head><body><a class="skip-link" href="#main-content">Skip to content</a><header class="site-header"><div class="shell header-inner"><a class="brand" href="/" aria-label="DiaryFolio home"><span class="brand-mark" aria-hidden="true">D</span><span>DiaryFolio</span></a><nav aria-label="Primary navigation"><a href="/" aria-current="page">Articles</a><a href="/archive.html">Archive</a><a href="/search.html">Search</a><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false" title="Toggle colour theme">◐</button></nav></div></header><main id="main-content" class="shell" tabindex="-1"><article class="article"><header><p class="eyebrow"><time datetime="2020-07-18T18:37:00.009Z">18 July 2020</time> · Kk · 2 min read</p><h1>Syslog Standards: A simple Comparison between RFC3164 &amp; RFC5424</h1><p class="tags"><span>data science</span><span>syslog</span><span>big data</span></p></header><div class="prose"><h2>Syslog Standards: A simple Comparison between RFC3164 (old format) &amp; RFC5424 (new format)</h2>Though syslog standards have been for quite long time, lot of people still
+doesn't understand the formats in detail. The original standard document is
+quite lengthy to read and purpose of this article is to explain with examples<h3>Some of things you might need to understand</h3>
+<div>
+  <ul>
+    <li>
+      The RFC standards can be used in any syslog daemon (syslog-ng, rsyslog
+      etc.)
+    </li>
+    <li>
+      Always try to capture the data in these standards. Especially when you
+      have log aggregation like Splunk or Elastic, these templates are built-in
+      which makes your life simple.
+    </li>
+    <li>Syslog can work with both UDP &amp; TCP&nbsp;</li>
+  </ul>
+  <h3>Link to the documents</h3>
+</div>
+<div>
+  <ul>
+    <li>
+      <span>the original BSD format (</span><a href="https://tools.ietf.org/html/rfc3164" target="_blank">RFC3164</a><span>)</span>
+    </li>
+    <li>
+      <span>the “new” format (</span><a href="https://tools.ietf.org/html/rfc5424" target="_blank">RFC5424</a><span>)</span></li></ul><div>
+  </div>
+  <div>
+    <h3>
+      RFC3164 (the old format)
+    </h3>
+    <div>
+      <br />
+    </div>
+    <div>
+      RFC3164 originated from combining multiple implementations (Year 2001)
+        and have slightly different variations. But the message format should
+        like&nbsp;
+    </div>
+    <div>
+      <br />
+    </div>
+    <div></div>
+  </div>
+<pre><code>&lt;35&gt;Oct 12 22:14:15 client_machine su: 'su root' failed for joe on /dev/pts/2</code></pre>
+  <div>
+    <br />
+  </div>
+  <div>
+    <div>
+        <ul>
+          <li>
+            <div>
+                &lt;35&gt; is a priority number. From the below matrix, you can
+                see it is Auth , Error
+              </div>
+          </li>
+          <li>
+            <div>
+              &nbsp;<i>Oct 12 22:14:15</i> is commonly known as syslog
+              timestamp. Sometimes it will be ISO-8601 format too
+            </div>
+          </li>
+          <li>
+            <div>
+              client_machine is the sender of the message (%hostname% field in
+              payload)
+            </div>
+          </li>
+          <li><div>su: is a tag (mostly process name)</div></li>
+          <li>
+            <div>Rest is the <i>MSG</i> component</div></li></ul></div>
+  </div>
+  <div>
+    <h3>RFC5424 (the new format)</h3>
+  </div>
+  <div>
+    RFC5424 came towards end of 2009 and is a better standard and more
+      precise timestamp. The message limit is also configurable in this standard
+      thus able to accept more than 1K size messages.
+  </div>
+  <div>
+    <br />
+  </div>
+<pre><code>&lt;35&gt;1 2013-10-11T22:14:15.003Z client_machine su - - - 'su root' failed for joe on /dev/pts/2</code></pre></div>
+  <div>
+    <br />
+  </div>
+  <div>
+    Also RFC5424 supports Structured Message payload in the MSG component
+      making it easier for parsing.
+  </div>
+  <div><br /></div><div>
+  </div>
+  <div>
+    <h3>Priority Matrix of Facility-Severity&nbsp;</h3><h3><ul><li>Header column is 'Severity'</li><li>Row column is 'Facility'</li><li>Each cell value is called Priority</li></ul></h3><div class="separator"><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiPg6pNqBlxXD-0f9suSa72tzKtbW_Q-y8FEuUWpF85nfkv24da4g4VLn_ufhLAAAiMeWjMp8N7kcMyYH4YSv_AulW24cXMQ4gz4HOcXOGq8lm7P4rIdgXGaAgOU-k6TijfBo_rhBtqFOcW/s1622/Screenshot+2020-07-18+at+20.05.05.png"><img border="0" data-original-height="1622" data-original-width="1548" height="625" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiPg6pNqBlxXD-0f9suSa72tzKtbW_Q-y8FEuUWpF85nfkv24da4g4VLn_ufhLAAAiMeWjMp8N7kcMyYH4YSv_AulW24cXMQ4gz4HOcXOGq8lm7P4rIdgXGaAgOU-k6TijfBo_rhBtqFOcW/w595-h625/Screenshot+2020-07-18+at+20.05.05.png" width="595" /></a></div><div><br /></div>
+  </div>
+  <div><br /></div>
+</div></article><script type="module">document.querySelectorAll(`.prose pre`).forEach(e=>{let t=(e.textContent??``).trim();e.textContent=t;let n=document.createElement(`div`);n.className=`code-block`;let r=document.createElement(`div`);r.className=`code-toolbar`;let i=document.createElement(`span`);i.textContent=`Snippet`;let a=document.createElement(`span`);a.className=`code-actions`;let o=document.createElement(`button`);if(o.className=`code-copy`,o.type=`button`,o.textContent=`Copy`,o.addEventListener(`click`,async()=>{try{await navigator.clipboard.writeText(t),o.textContent=`Copied`}catch{o.textContent=`Select and copy`}window.setTimeout(()=>{o.textContent=`Copy`},1400)}),a.append(o),t.length>280||t.split(`
+`).length>10){e.classList.add(`code-collapsed`);let t=document.createElement(`button`);t.className=`code-toggle`,t.type=`button`,t.textContent=`Expand`,t.addEventListener(`click`,()=>{let n=e.classList.toggle(`code-expanded`);t.textContent=n?`Collapse`:`Expand`}),a.prepend(t)}r.append(i,a),e.replaceWith(n),n.append(r,e)});</script></main><footer class="site-footer"><div class="shell">DiaryFolio · Technical notes since 2008</div></footer><script>
+      const themeToggle = document.querySelector('#theme-toggle');
+      const setTheme = (theme) => {
+        document.documentElement.dataset.theme = theme;
+        try { localStorage.setItem('diaryfolio-theme', theme); } catch {}
+        themeToggle?.setAttribute('aria-pressed', String(theme === 'dark'));
+      };
+      themeToggle?.addEventListener('click', () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
+      themeToggle?.setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
+    </script></body></html>

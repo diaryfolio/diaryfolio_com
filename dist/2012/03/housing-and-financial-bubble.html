@@ -1,0 +1,36 @@
+<!DOCTYPE html><html lang="en"><head><script>
+      try {
+        const savedTheme = localStorage.getItem('diaryfolio-theme');
+        if (savedTheme === 'dark' || (!savedTheme && matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.dataset.theme = 'dark';
+        }
+      } catch {}
+    </script><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f5f7f8" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#10171c" media="(prefers-color-scheme: dark)"><meta name="description" content="DiaryFolio article: Housing and Financial bubble"><link rel="canonical" href="https://diaryfolio.com/2012/03/housing-and-financial-bubble.html"><meta property="og:type" content="article"><meta property="og:site_name" content="DiaryFolio"><meta property="og:title" content="Housing and Financial bubble · DiaryFolio"><meta property="og:description" content="DiaryFolio article: Housing and Financial bubble"><meta property="og:url" content="https://diaryfolio.com/2012/03/housing-and-financial-bubble.html"><meta property="og:locale" content="en_GB"><meta name="twitter:card" content="summary"><link rel="alternate" type="application/rss+xml" title="DiaryFolio RSS" href="/rss.xml"><link rel="sitemap" href="/sitemap.xml"><link rel="icon" href="/favicon.ico"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"DiaryFolio","url":"https://diaryfolio.com/","potentialAction":{"@type":"SearchAction","target":"https://diaryfolio.com/search.html?q={search_term_string}","query-input":"required name=search_term_string"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Housing and Financial bubble","datePublished":"2012-03-06T12:56:00Z","dateModified":"2014-11-21T00:38:42.998Z","author":{"@type":"Person","name":"df"},"mainEntityOfPage":"https://diaryfolio.com/2012/03/housing-and-financial-bubble.html","url":"https://diaryfolio.com/2012/03/housing-and-financial-bubble.html"}</script><title>Housing and Financial bubble · DiaryFolio</title><link rel="stylesheet" href="/_astro/BaseLayout.DuKjOxZC.css"></head><body><a class="skip-link" href="#main-content">Skip to content</a><header class="site-header"><div class="shell header-inner"><a class="brand" href="/" aria-label="DiaryFolio home"><span class="brand-mark" aria-hidden="true">D</span><span>DiaryFolio</span></a><nav aria-label="Primary navigation"><a href="/" aria-current="page">Articles</a><a href="/archive.html">Archive</a><a href="/search.html">Search</a><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false" title="Toggle colour theme">◐</button></nav></div></header><main id="main-content" class="shell" tabindex="-1"><article class="article"><header><p class="eyebrow"><time datetime="2012-03-06T12:56:00Z">6 March 2012</time> · df · 1 min read</p><h1>Housing and Financial bubble</h1><p class="tags"><span>UK house prices</span><span>uk house price crash</span><span>Business</span></p></header><div class="prose"><div dir="ltr" trbidi="on">
+I'm not a economic expert , but I like reading articles about finance and markets around the world.<br />
+We are not sure about the depth of 2008 financial crisis but my opinion is its still in the down-trend<br />
+<br />
+There are some excellent articles about housing market.<br />
+One of the graphs which caught my eye is the "LifeCycle of a bubble"&nbsp; by "<a href="http://people.hofstra.edu/jean-paul_rodrigue/jpr_blogs.html" title="Dr. Jean-Paul Rodrigue">Dr. Jean-Paul Rodrigue</a>"<br />
+<br />
+<a href="http://incsi.org/dp/install/wordpress/wp-content/uploads/bubble-lifecycle.jpg"><img alt="" class="alignnone size-full wp-image-37" src="http://incsi.org/dp/install/wordpress/wp-content/uploads/bubble-lifecycle.jpg" title="bubble-lifecycle" /></a><br />
+<br />
+<br />
+<br />
+This bubble varies across countries and I feel it holds true in developed countries like the UK, US and many european countries.<br />
+The phases are at different stages in various countries.<br />
+But well worth to be aware of<br />
+<br />
+Some Helpful Links for Buying House<br />
+<ul><a href="https://diaryfolio.com/2012/10/planning-to-buy-house-one-stop-shop.html" target="_blank"> &nbsp;One Stop Shop</a></ul>
+<a href="https://diaryfolio.com/planning-to-buy-a-house/"><br /></a></div>
+</div></article><script type="module">document.querySelectorAll(`.prose pre`).forEach(e=>{let t=(e.textContent??``).trim();e.textContent=t;let n=document.createElement(`div`);n.className=`code-block`;let r=document.createElement(`div`);r.className=`code-toolbar`;let i=document.createElement(`span`);i.textContent=`Snippet`;let a=document.createElement(`span`);a.className=`code-actions`;let o=document.createElement(`button`);if(o.className=`code-copy`,o.type=`button`,o.textContent=`Copy`,o.addEventListener(`click`,async()=>{try{await navigator.clipboard.writeText(t),o.textContent=`Copied`}catch{o.textContent=`Select and copy`}window.setTimeout(()=>{o.textContent=`Copy`},1400)}),a.append(o),t.length>280||t.split(`
+`).length>10){e.classList.add(`code-collapsed`);let t=document.createElement(`button`);t.className=`code-toggle`,t.type=`button`,t.textContent=`Expand`,t.addEventListener(`click`,()=>{let n=e.classList.toggle(`code-expanded`);t.textContent=n?`Collapse`:`Expand`}),a.prepend(t)}r.append(i,a),e.replaceWith(n),n.append(r,e)});</script></main><footer class="site-footer"><div class="shell">DiaryFolio · Technical notes since 2008</div></footer><script>
+      const themeToggle = document.querySelector('#theme-toggle');
+      const setTheme = (theme) => {
+        document.documentElement.dataset.theme = theme;
+        try { localStorage.setItem('diaryfolio-theme', theme); } catch {}
+        themeToggle?.setAttribute('aria-pressed', String(theme === 'dark'));
+      };
+      themeToggle?.addEventListener('click', () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
+      themeToggle?.setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
+    </script></body></html>
