@@ -11,10 +11,10 @@ Cloudflare remains the registrar/DNS and security control plane. GitHub Pages be
 ## Deployment
 
 1. Push or merge the tested site to `main`.
-2. GitHub Actions installs the locked dependencies and runs `npm run build`.
+2. GitHub Actions uses Node.js 24, installs the locked dependencies with `npm ci`, and runs `npm run build`.
 3. The workflow uploads `dist/` as the Pages artifact.
 4. GitHub deploys the artifact to the `github-pages` environment.
-5. `public/CNAME` is copied into the artifact as `CNAME`, preserving `diaryfolio.com`.
+5. `public/CNAME` is copied into the artifact as a record of the intended domain; the `diaryfolio.com` value configured in **Settings → Pages** is authoritative.
 
 `node_modules/` and `dist/` are build artifacts and are ignored by `.gitignore`; they are never versioned. The locked `npm ci` plus `npm run build` steps in the workflow are the only producer of `dist/`, so every deployment reflects an installed, reproducible build.
 
@@ -31,7 +31,7 @@ GitHub recommends verifying the domain through the account or organisation Pages
 
 ## Cloudflare DNS cutover
 
-Before the cutover, remove the Worker custom domain for `diaryfolio.com`; it currently owns the apex DNS record. Add the four GitHub Pages apex A records and the `www` CNAME shown in the repository README. Do not leave the old Google/Blogger A records or the Worker record alongside them.
+Before the cutover, remove the Worker custom domain for `diaryfolio.com`; it currently owns the apex DNS record. Add the four GitHub Pages apex A records shown in the repository README and point the `www` CNAME directly to the owning organisation's default Pages domain, `diaryfolio.github.io`. Do not include the repository name in the CNAME target, and do not leave the old Google/Blogger A records or the Worker record alongside the GitHub records.
 
 Use **DNS only** during GitHub's domain and certificate checks. GitHub Pages already uses a CDN, so enabling the Cloudflare proxy is optional rather than required. If the proxy is enabled later, retest HTTPS, redirects, caching, and the GitHub Pages domain check.
 

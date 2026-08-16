@@ -34,7 +34,7 @@ The workflow at `.github/workflows/deploy-pages.yml` builds and deploys `dist/` 
 3. Set the custom domain to `diaryfolio.com` and enable HTTPS after GitHub provisions the certificate.
 4. Merge the tested changes into `main` or run the workflow manually.
 
-`public/CNAME` keeps the custom domain in the deployed artifact. The `github.io` project URL becomes the hosting endpoint, while visitors and search engines use `diaryfolio.com`.
+`public/CNAME` records the intended custom domain in the deployed artifact, but the custom-domain value in **Settings → Pages** is authoritative for a GitHub Actions deployment. The `github.io` project URL becomes the hosting endpoint, while visitors and search engines use `diaryfolio.com`.
 
 ## Cloudflare DNS for GitHub Pages
 
@@ -46,7 +46,7 @@ Remove the existing Worker custom-domain record for the apex before changing DNS
 | A | `@` | `185.199.109.153` | DNS only |
 | A | `@` | `185.199.110.153` | DNS only |
 | A | `@` | `185.199.111.153` | DNS only |
-| CNAME | `www` | `usnetcyber.github.io` | DNS only |
+| CNAME | `www` | `diaryfolio.github.io` | DNS only |
 
 Keep the records DNS-only until GitHub reports the custom domain and HTTPS certificate as healthy. GitHub will redirect `www.diaryfolio.com` to the configured apex domain.
 
