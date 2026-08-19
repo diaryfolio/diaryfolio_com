@@ -1,5 +1,6 @@
 ---
 import '../styles/site.css';
+import ConsentBanner from '../components/ConsentBanner.astro';
 
 interface Props {
   title?: string;
@@ -27,7 +28,7 @@ const navItems = [
   { href: '/search.html', label: 'Search' }
 ];
 const isCurrent = (href: string) => href === '/'
-  ? !['/archive.html', '/search.html'].includes(currentPath)
+  ? !['/archive.html', '/search.html', '/privacy.html'].includes(currentPath)
   : currentPath === href;
 const siteStructuredData = {
   '@context': 'https://schema.org',
@@ -72,15 +73,6 @@ const siteStructuredData = {
     <link rel="icon" href="/favicon.ico" />
     <script type="application/ld+json" set:html={JSON.stringify(siteStructuredData)}></script>
     {structuredData && <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>}
-    {googleAnalyticsId && <>
-      <script async src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}></script>
-      <script is:inline define:vars={{ googleAnalyticsId }}>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { window.dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', googleAnalyticsId);
-      </script>
-    </>}
     {adsEnabled && <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`} crossorigin="anonymous"></script>}
     <title>{pageTitle}</title>
   </head>
@@ -96,7 +88,16 @@ const siteStructuredData = {
       </div>
     </header>
     <main id="main-content" class="shell" tabindex="-1"><slot /></main>
-    <footer class="site-footer"><div class="shell">DiaryFolio · Technical notes since 2008</div></footer>
+    <footer class="site-footer">
+      <div class="shell site-footer-inner">
+        <span>DiaryFolio · Technical notes since 2008</span>
+        <span class="footer-links">
+          <a href="/privacy.html">Privacy and cookies</a>
+          {googleAnalyticsId && <button type="button" id="cookie-settings" aria-controls="analytics-consent">Cookie settings</button>}
+        </span>
+      </div>
+    </footer>
+    <ConsentBanner googleAnalyticsId={googleAnalyticsId} />
     <script is:inline>
       const themeToggle = document.querySelector('#theme-toggle');
       const setTheme = (theme) => {

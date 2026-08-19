@@ -10,6 +10,7 @@ Read this file before changing the site. DiaryFolio is a compact, static technic
 - Keep canonical URLs on the apex domain: `https://diaryfolio.com`.
 - Preserve existing `.html` article routes and migrated content URLs.
 - Keep the default build free of analytics and advertising requests. Those integrations are enabled only through documented build variables.
+- When Analytics is enabled, do not load Google code or send analytics data before the visitor has explicitly accepted optional analytics.
 - Keep production output static and compatible with GitHub Pages.
 
 ## Design documentation is part of the code

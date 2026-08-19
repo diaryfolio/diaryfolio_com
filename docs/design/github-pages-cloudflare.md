@@ -37,16 +37,28 @@ Use **DNS only** during GitHub's domain and certificate checks. GitHub Pages alr
 
 ## Google Analytics and AdSense
 
-GitHub Pages serves normal static HTML and JavaScript, so Google Analytics works normally. The Astro layout adds the Google tag only when `PUBLIC_GA_MEASUREMENT_ID` is present at build time.
+GitHub Pages serves normal static HTML and JavaScript, so Google Analytics works normally. The Astro build includes the analytics consent UI only when `PUBLIC_GA_MEASUREMENT_ID` is present at build time. It does not emit a Google script tag in the generated HTML.
+
+DiaryFolio uses basic consent mode for Analytics:
+
+1. A first visit displays an analytics-only consent panel.
+2. Until the visitor accepts, no Google tag is loaded and no analytics request is sent.
+3. Acceptance grants only `analytics_storage`; advertising storage, user data, and personalisation remain denied.
+4. The choice is stored locally for 180 days.
+5. The footer Cookie settings control lets the visitor change the choice. Withdrawal sends a denied update when possible, removes accessible `_ga` cookies, and reloads without Analytics.
+
+The static privacy page at `/privacy.html` describes this behaviour and is included in the sitemap. If the build variable is absent, the site has no Analytics banner, Cookie settings button, Google code, or analytics requests; the privacy link remains available.
 
 AdSense code also works technically, but approval is domain- and policy-based. Submit `diaryfolio.com` to AdSense; do not rely on the project URL under `github.io` for approval. After approval:
 
 1. Add the publisher and slot IDs as GitHub Actions repository variables.
 2. Set `PUBLIC_ADS_ENABLED=true`.
 3. Publish an `ads.txt` file using the exact line supplied by AdSense.
-4. Implement the required privacy notice and consent flow for the intended audience and jurisdictions.
+4. Implement a separate Google-certified CMP flow for the intended audience and jurisdictions.
 
-The current site deliberately emits no analytics or ad requests when those variables are absent.
+The built-in analytics consent panel does not grant or communicate advertising consent. Keep `PUBLIC_ADS_ENABLED` unset or false until the separate advertising consent flow is complete.
+
+The current site deliberately emits no analytics or ad requests when those variables are absent. Adding or changing a repository variable requires a fresh GitHub Actions build because Astro resolves it at build time.
 
 ## Rollback
 

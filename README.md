@@ -63,6 +63,8 @@ PUBLIC_ADSENSE_ARTICLE_SLOT=1234567890
 
 These values are intentionally public in the generated HTML. Leave them unset for a tracking-free local build. AdSense must approve `diaryfolio.com` before ads can appear, and privacy/consent requirements must be completed first. See `docs/advertising-and-analytics.md`.
 
+When Analytics is configured, DiaryFolio uses basic consent mode: the Google tag is not loaded until the visitor accepts optional analytics. The footer provides a permanent privacy link and cookie-settings control. The built-in consent flow does not authorise AdSense; keep advertising disabled until its separate CMP requirements are satisfied.
+
 ## Design and migration notes
 
 - [Design documentation index and update contract](docs/design/README.md)

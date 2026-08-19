@@ -54,3 +54,11 @@ Technical metadata, tags, dates, code labels, and the footer use the system mono
 - The active navigation item uses `aria-current="page"`.
 - Search results report changes through a polite live region and expose loading state.
 - Motion and smooth scrolling are disabled when the visitor requests reduced motion.
+
+## Consent surfaces
+
+- The analytics consent panel is a compact fixed-bottom dialog that uses the existing card, colour, type, and focus systems.
+- Accept and reject are both explicit buttons; the banner has no preselected choice and does not seize focus on first display.
+- At narrow widths the content and controls stack, with both actions retaining comfortable touch targets and no horizontal overflow.
+- The footer always links to the privacy page. When Analytics is configured, it also exposes a persistent Cookie settings button so withdrawal is as accessible as acceptance.
+- The banner is rendered only when the Analytics build variable exists and no current choice has been stored.

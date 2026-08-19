@@ -1,0 +1,136 @@
+---
+interface Props {
+  googleAnalyticsId?: string;
+}
+
+const { googleAnalyticsId } = Astro.props;
+---
+
+{googleAnalyticsId && <>
+  <section
+    class="consent-banner"
+    id="analytics-consent"
+    role="dialog"
+    aria-modal="false"
+    aria-labelledby="analytics-consent-title"
+    aria-describedby="analytics-consent-description"
+    hidden
+  >
+    <div>
+      <p class="eyebrow">Optional analytics</p>
+      <h2 id="analytics-consent-title">Help improve DiaryFolio?</h2>
+      <p id="analytics-consent-description">
+        Analytics cookies help show which technical notes are useful. No analytics data is sent unless you accept.
+        <a href="/privacy.html">Privacy and cookies</a>
+      </p>
+    </div>
+    <div class="consent-actions">
+      <button type="button" id="accept-analytics">Accept analytics</button>
+      <button type="button" id="reject-analytics">Reject</button>
+    </div>
+  </section>
+  <script is:inline define:vars={{ googleAnalyticsId }}>
+    (() => {
+      const consentKey = 'diaryfolio-consent-v1';
+      const consentLifetime = 180 * 24 * 60 * 60 * 1000;
+      const banner = document.querySelector('#analytics-consent');
+      const acceptButton = document.querySelector('#accept-analytics');
+      const rejectButton = document.querySelector('#reject-analytics');
+      const settingsButton = document.querySelector('#cookie-settings');
+      let returnFocusToSettings = false;
+
+      const consentState = (analyticsStorage) => ({
+        analytics_storage: analyticsStorage,
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied'
+      });
+
+      const readChoice = () => {
+        try {
+          const stored = JSON.parse(localStorage.getItem(consentKey));
+          if (!['granted', 'denied'].includes(stored?.analytics) || !Number.isFinite(stored?.updatedAt)) return null;
+          if (Date.now() - stored.updatedAt > consentLifetime) {
+            localStorage.removeItem(consentKey);
+            return null;
+          }
+          return stored.analytics;
+        } catch {
+          return null;
+        }
+      };
+
+      const saveChoice = (analytics) => {
+        try {
+          localStorage.setItem(consentKey, JSON.stringify({ analytics, updatedAt: Date.now() }));
+        } catch {}
+      };
+
+      const showBanner = (focus = false) => {
+        if (!banner) return;
+        banner.hidden = false;
+        returnFocusToSettings = focus;
+        if (focus) acceptButton?.focus();
+      };
+
+      const hideBanner = () => {
+        if (banner) banner.hidden = true;
+        if (returnFocusToSettings) settingsButton?.focus();
+        returnFocusToSettings = false;
+      };
+
+      const ensureGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+      };
+
+      const loadAnalytics = () => {
+        if (document.querySelector('script[data-diaryfolio-analytics]')) return;
+        ensureGtag();
+        window.gtag('consent', 'default', consentState('denied'));
+        window.gtag('consent', 'update', consentState('granted'));
+        window.gtag('js', new Date());
+        window.gtag('config', googleAnalyticsId);
+
+        const script = document.createElement('script');
+        script.async = true;
+        script.dataset.diaryfolioAnalytics = '';
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(googleAnalyticsId)}`;
+        document.head.append(script);
+      };
+
+      const deleteAnalyticsCookies = () => {
+        const rootDomain = location.hostname.replace(/^www\./, '');
+        document.cookie.split(';').forEach((cookie) => {
+          const name = cookie.split('=')[0]?.trim();
+          if (name !== '_ga' && !name?.startsWith('_ga_')) return;
+          document.cookie = `${name}=; Max-Age=0; path=/; SameSite=Lax`;
+          document.cookie = `${name}=; Max-Age=0; path=/; domain=.${rootDomain}; SameSite=Lax`;
+        });
+      };
+
+      acceptButton?.addEventListener('click', () => {
+        saveChoice('granted');
+        loadAnalytics();
+        hideBanner();
+      });
+
+      rejectButton?.addEventListener('click', () => {
+        const analyticsWasLoaded = Boolean(document.querySelector('script[data-diaryfolio-analytics]'));
+        saveChoice('denied');
+        if (typeof window.gtag === 'function') {
+          window.gtag('consent', 'update', consentState('denied'));
+        }
+        deleteAnalyticsCookies();
+        hideBanner();
+        if (analyticsWasLoaded) location.reload();
+      });
+
+      settingsButton?.addEventListener('click', () => showBanner(true));
+
+      const choice = readChoice();
+      if (choice === 'granted') loadAnalytics();
+      if (choice === null) showBanner();
+    })();
+  </script>
+</>}
