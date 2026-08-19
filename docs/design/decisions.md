@@ -57,3 +57,15 @@ This log records material decisions. The linked design documents describe the fu
 **Why:** Committed dependencies and build output inflate the repository history and increase the risk of accidentally committing a real credential; the locked `npm ci` workflow already provides a reproducible build.
 
 **Details:** [GitHub Pages with Cloudflare DNS](github-pages-cloudflare.md)
+
+## D-007 — Analytics requires explicit prior consent
+
+**Status:** Accepted
+
+**Decision:** Use basic consent mode for Google Analytics. When the Analytics build variable is configured, do not load Google code or send analytics data until the visitor accepts. Remember the choice for 180 days and provide permanent privacy and Cookie settings controls in the footer.
+
+**Why:** Analytics cookies are optional, and DiaryFolio serves UK/EEA visitors. Basic mode provides a clear boundary: rejection sends no Analytics data, while acceptance remains reversible.
+
+**Consequences:** Only `analytics_storage` is granted by the built-in panel. Advertising consent remains denied and AdSense must stay disabled until a separate Google-certified CMP flow is implemented.
+
+**Details:** [GitHub Pages with Cloudflare DNS](github-pages-cloudflare.md)

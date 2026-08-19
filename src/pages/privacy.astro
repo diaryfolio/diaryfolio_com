@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Privacy and cookies"
+  description="How DiaryFolio uses browser storage and optional Google Analytics."
+>
+  <article class="article">
+    <header>
+      <p class="eyebrow">Site information</p>
+      <h1>Privacy and cookies</h1>
+      <p>How DiaryFolio uses browser storage and optional analytics.</p>
+    </header>
+    <div class="prose">
+      <p class="article-lead">
+        DiaryFolio is a static technical archive. Optional Google Analytics is disabled until you explicitly accept it.
+      </p>
+
+      <h2>Necessary browser storage</h2>
+      <p>
+        The site stores your light or dark theme preference in your browser. If analytics is configured, it also stores
+        your analytics choice for up to 180 days so the consent question does not appear on every visit. These preferences
+        are not used to follow you across other websites.
+      </p>
+
+      <h2>Optional Google Analytics</h2>
+      <p>
+        If you accept analytics, DiaryFolio loads Google Analytics to understand aggregate usage such as pages visited and
+        general browser or device information. Google Analytics may create first-party cookies whose names begin with{' '}
+        <code>_ga</code>. Advertising storage and personalisation remain denied by this site’s analytics consent setting.
+      </p>
+      <p>
+        If you reject analytics, the Google Analytics script is not loaded and no analytics request is sent. Learn more in{' '}
+        <a href="https://policies.google.com/privacy">Google’s privacy policy</a>.
+      </p>
+
+      <h2>Change your choice</h2>
+      <p>
+        Use <strong>Cookie settings</strong> in the footer at any time. Withdrawing consent stops Analytics on subsequent
+        page loads and removes accessible DiaryFolio cookies whose names begin with <code>_ga</code>.
+      </p>
+
+      <h2>Advertising</h2>
+      <p>
+        The analytics choice described here does not grant advertising consent. Advertising must remain disabled unless a
+        separate, appropriate consent-management process is configured.
+      </p>
+
+      <p><small>Last updated: 19 August 2026.</small></p>
+    </div>
+  </article>
+</BaseLayout>

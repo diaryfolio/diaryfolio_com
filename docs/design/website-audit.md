@@ -2,7 +2,7 @@
 
 ## Scope
 
-The audit covers the Astro source, 113 migrated posts, generated production HTML, archive/search behaviour, responsive presentation, metadata, and static hosting. The baseline build completed successfully and generated 117 pages.
+The audit covers the Astro source, 113 migrated posts, generated production HTML, archive/search behaviour, responsive presentation, metadata, privacy controls, and static hosting. The baseline build completes successfully and generates 118 pages.
 
 ## Findings and resolutions
 
@@ -19,6 +19,7 @@ The audit covers the Astro source, 113 migrated posts, generated production HTML
 | Medium | The topic selector exposed hundreds of one-off migrated labels. | The filter was difficult to scan and operate. | The selector shows the 30 most-used topics; all labels remain searchable as text. |
 | Medium | Google-hosted display fonts were render-blocking. | Extra third-party request and an overly editorial visual tone. | The site now uses a fast system sans-serif and system monospace stack. |
 | Medium | Keyboard focus and skip navigation were missing. | Keyboard navigation was harder to follow. | Added a skip link, visible focus states, and current-page navigation state. |
+| Medium | Analytics loaded immediately whenever its build variable was present. | UK/EEA visitors had no prior choice and no persistent withdrawal control. | Analytics now uses a basic consent flow that blocks Google code until acceptance, remembers the choice for 180 days, and exposes Cookie settings in the footer. |
 | Low | Four old posts contained HTTP iframe URLs. | Modern browsers could block the embeds as mixed content. | Upgraded the known embeds to HTTPS and added titles and lazy loading. |
 | Low | The migrated Astro 5 dependency tree reported security advisories. | Build tooling should not retain known vulnerable packages even though the deployed output is static. | Upgraded to Astro 7.2.2 and compatible patched transitive packages; `npm audit` now reports zero vulnerabilities. |
 
@@ -42,5 +43,7 @@ Zensical was considered, but its current focus is technical documentation and it
 - Article images remain within the reading column and retain aspect ratio.
 - Code blocks are readable, scrollable, copyable, and collapsible when long.
 - Canonical, RSS, sitemap, robots, and structured data agree on the apex domain.
+- The privacy page is included in the sitemap, and the footer exposes privacy and cookie controls.
+- With Analytics configured, no Google Analytics script or request occurs before acceptance; rejection persists, and withdrawal prevents loading on the next page view.
 - Production HTML contains no scripts after `</html>`.
 - GitHub Pages publishes the exact Astro `dist/` artifact.
