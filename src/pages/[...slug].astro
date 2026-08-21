@@ -40,41 +40,8 @@ const articleStructuredData = {
     <AdSlot slot={import.meta.env.PUBLIC_ADSENSE_ARTICLE_SLOT ?? ''} format="fluid" />
   </article>
   <script>
-    document.querySelectorAll('.prose pre').forEach((pre) => {
-      const codeText = (pre.textContent ?? '').trim();
-      pre.textContent = codeText;
-      const block = document.createElement('div');
-      block.className = 'code-block';
-      const toolbar = document.createElement('div');
-      toolbar.className = 'code-toolbar';
-      const label = document.createElement('span');
-      label.textContent = 'Snippet';
-      const actions = document.createElement('span');
-      actions.className = 'code-actions';
-      const copy = document.createElement('button');
-      copy.className = 'code-copy';
-      copy.type = 'button';
-      copy.textContent = 'Copy';
-      copy.addEventListener('click', async () => {
-        try { await navigator.clipboard.writeText(codeText); copy.textContent = 'Copied'; } catch { copy.textContent = 'Select and copy'; }
-        window.setTimeout(() => { copy.textContent = 'Copy'; }, 1400);
-      });
-      actions.append(copy);
-      if (codeText.length > 280 || codeText.split('\n').length > 10) {
-        pre.classList.add('code-collapsed');
-        const toggle = document.createElement('button');
-        toggle.className = 'code-toggle';
-        toggle.type = 'button';
-        toggle.textContent = 'Expand';
-        toggle.addEventListener('click', () => {
-          const expanded = pre.classList.toggle('code-expanded');
-          toggle.textContent = expanded ? 'Collapse' : 'Expand';
-        });
-        actions.prepend(toggle);
-      }
-      toolbar.append(label, actions);
-      pre.replaceWith(block);
-      block.append(toolbar, pre);
-    });
+    import { enhanceArticle } from '../scripts/article';
+
+    void enhanceArticle();
   </script>
 </BaseLayout>

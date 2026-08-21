@@ -13,6 +13,58 @@ Read this file before changing the site. DiaryFolio is a compact, static technic
 - When Analytics is enabled, do not load Google code or send analytics data before the visitor has explicitly accepted optional analytics.
 - Keep production output static and compatible with GitHub Pages.
 
+## Blog etiquette
+
+Apply these rules whenever creating or materially editing an article:
+
+- Use concise, direct technical prose. Prefer short sentences and focused
+  paragraphs. Remove repeated conclusions, throat-clearing, and filler.
+- Use plain ASCII punctuation wherever possible. Do not use em dashes, en
+  dashes, or smart quotes. Use full stops, commas, colons, semicolons,
+  parentheses, or the ASCII hyphen instead. Use non-ASCII characters only
+  when a proper name, quotation, data value, or technical subject requires it.
+- Avoid stock AI language and inflated phrasing, including "delve",
+  "ever-evolving landscape", "game-changer", "it is important to note",
+  "in today's world", and generic "in conclusion" summaries.
+- Do not narrate the writing process or mention AI, prompts, internal research
+  dossiers, or `research_id` in the public article body. `research_id` belongs
+  only in frontmatter.
+- Lead with the useful answer. For researched articles, place a compact
+  **Quick read** near the start with the main answer, key takeaways, and the
+  most important caveat.
+- Use descriptive headings. Avoid clickbait, rhetorical questions used as
+  padding, and headings that merely repeat the title.
+- Write for the end reader, not for the author or search engine. Explain the
+  practical meaning first, define unavoidable jargon, and use a concrete
+  example when it makes the idea easier to apply.
+- Keep the page easy to scan. Break a long wall of text with meaningful
+  headings, short lists, a comparison table, or a diagram only when that
+  structure improves understanding.
+- Prefer a table for exact comparisons or repeated fields. Prefer a flow
+  diagram for sequences, dependencies, architecture, or several interacting
+  parts. A visual must replace or simplify prose, not decorate it.
+- Mermaid diagrams use a fenced `mermaid` code block. Include Mermaid
+  `accTitle` and `accDescr`, keep labels concise, and verify the rendered SVG
+  in the production preview at desktop and mobile sizes. Use a repository-owned
+  image instead when Mermaid cannot express the visual clearly.
+- Use an animated diagram when its progressive reveal helps explain a flow,
+  sequence, dependency, architecture, or timeline. Do not add a chart merely
+  to create motion. Mermaid SVG diagrams animate automatically once when they
+  enter the viewport, so article content must not include its own autoplay,
+  looping, or decorative animation instructions.
+- Keep tables and diagrams readable: concise labels, clear units, source and
+  cutoff where relevant, useful alt text or caption, and no page-level
+  horizontal overflow.
+- Distinguish verified facts, vendor claims, independent evidence, inference,
+  and uncertainty. Date volatile information and link important external
+  sources directly.
+- Do not declare a universal winner from mixed evidence. A scoped winner or
+  recommendation must name its criteria and include a practical caveat.
+- Prefer tables for genuinely comparable structured data. Do not force prose
+  into a table or compare incompatible measurements as if they were equal.
+- End when the analysis is complete. Do not restate the entire article in a
+  second conclusion.
+
 ## Design documentation is part of the code
 
 Any change that affects architecture, visual language, layout, typography, hosting, DNS, metadata, URL policy, content conventions, dependencies, analytics, or advertising must update the relevant file under `docs/design/` in the same change.
