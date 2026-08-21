@@ -25,13 +25,14 @@ The audit covers the Astro source, 113 migrated posts, generated production HTML
 
 ## Generator decision
 
-Astro remains a build-time dependency only: GitHub Pages serves the generated HTML, CSS, and JavaScript without an Astro server. It is retained because the existing implementation already provides the blog-specific features this archive needs—chronological collections, cards, RSS, sitemap, legacy routes, structured metadata, and a custom searchable index—with one direct production dependency.
+Astro remains a build-time dependency only: GitHub Pages serves the generated HTML, CSS, and JavaScript without an Astro server. It is retained because the existing implementation already provides the blog-specific features this archive needs: chronological collections, cards, RSS, sitemap, legacy routes, structured metadata, and a custom searchable index. Mermaid and Motion are the additional direct runtime dependencies. Both are bundled locally: Mermaid is loaded lazily only on article pages containing a Mermaid diagram, and Motion is loaded only after such a diagram renders and the visitor has not requested reduced motion.
 
 Zensical was considered, but its current focus is technical documentation and its native blog functionality is still on its roadmap. Moving now would trade a completed static implementation for theme overrides and another content migration without reducing the deployed footprint.
 
 ## Content quality observations
 
 - Several migrated posts have no description, so their cards contain only the title and metadata. New or high-traffic posts should receive concise frontmatter descriptions.
+- New posts developed from the separate research workflow may include an optional `research_id` matching `AR_[0-9]{4,}`. This is frontmatter-only provenance: reader-facing source sections link directly to important external evidence and do not expose the internal dossier ID. The public build does not read or depend on the research repository.
 - A subset of images remains hosted on `blogger.googleusercontent.com`; `data/unmatched-images.csv` is the migration backlog.
 - Historic posts contain obsolete external links and embedded demos. Preserve the original text, but annotate or repair broken resources when a post is reviewed.
 - The original `.html` routes are valuable backlinks and should remain stable.
@@ -42,6 +43,8 @@ Zensical was considered, but its current focus is technical documentation and it
 - Homepage and search cards work at desktop and mobile widths without horizontal overflow.
 - Article images remain within the reading column and retain aspect ratio.
 - Code blocks are readable, scrollable, copyable, and collapsible when long.
+- Fenced Mermaid blocks render as accessible SVG without a CDN request, stay
+  inside the reading column, and retain source-code fallback on render failure.
 - Canonical, RSS, sitemap, robots, and structured data agree on the apex domain.
 - The privacy page is included in the sitemap, and the footer exposes privacy and cookie controls.
 - With Analytics configured, no Google Analytics script or request occurs before acceptance; rejection persists, and withdrawal prevents loading on the next page view.

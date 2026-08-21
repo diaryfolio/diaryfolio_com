@@ -69,3 +69,70 @@ This log records material decisions. The linked design documents describe the fu
 **Consequences:** Only `analytics_storage` is granted by the built-in panel. Advertising consent remains denied and AdSense must stay disabled until a separate Google-certified CMP flow is implemented.
 
 **Details:** [GitHub Pages with Cloudflare DNS](github-pages-cloudflare.md)
+
+## D-008 — Research provenance without a runtime dependency
+
+**Status:** Accepted
+
+**Decision:** Allow an optional `research_id` in article frontmatter, constrained to the `AR_1001`-style identifier format. Keep the research dossier in `df-blog-collect`; keep only final article content and real assets in this repository.
+
+**Why:** A stable identifier makes the editorial evidence trail auditable without copying private workflow metadata into the public site or coupling the static build to another repository.
+
+**Details:** [Website audit](website-audit.md)
+
+## D-009 - Concise ASCII-first article style
+
+**Status:** Accepted
+
+**Decision:** New or materially edited articles follow the Blog etiquette in
+`CLAUDE.md`: direct technical prose, minimal repetition, plain ASCII
+punctuation wherever possible, evidence-aware claims, and no stock AI filler.
+They use tables, lists, examples, or diagrams when those forms make the subject
+clearer and easier to scan than long prose.
+
+**Why:** The owner wants compact articles that read like deliberate technical
+writing rather than verbose generated copy.
+
+**Consequences:** Existing migrated archive content is not rewritten in bulk.
+New articles and future material edits follow this convention. Non-ASCII text
+remains acceptable when the subject, a proper name, quotation, or data value
+requires it. Diagrams are used only when they simplify the subject.
+
+## D-010 - Mermaid diagrams are rendered from local bundles
+
+**Status:** Accepted
+
+**Decision:** Support fenced `mermaid` blocks on article pages. Load the local
+Mermaid bundle only when a diagram is present, render with strict security and
+a fixed high-contrast theme, require `accTitle` and `accDescr`, and retain a
+source-code fallback if rendering fails.
+
+**Why:** Flow, architecture, dependency, and sequence explanations can be
+clearer as diagrams than as long prose. A bundled renderer avoids a runtime
+CDN dependency and keeps GitHub Pages deployment static.
+
+**Consequences:** Mermaid becomes a direct dependency and creates a lazy
+client-side bundle. Diagram pages execute that bundle; articles without a
+diagram do not request it. Diagrams must be checked in the production preview
+at desktop and mobile sizes.
+
+## D-011 - Mermaid SVG animation is progressive and optional to the reader
+
+**Status:** Accepted
+
+**Decision:** Load Motion from the local bundle only after a Mermaid diagram
+has rendered. Reveal each diagram once when it enters the viewport, drawing a
+bounded set of visible unfilled strokes and fading in the complete SVG. Keep
+the final diagram fully static, do not loop, and skip the animation when the
+visitor requests reduced motion.
+
+**Why:** A short progressive reveal can make flows, sequences, dependencies,
+architectures, and timelines easier to follow without turning the technical
+archive into a motion-heavy interface. Lazy loading keeps pages without
+diagrams free of the animation dependency at runtime.
+
+**Consequences:** Motion is a direct dependency and creates a second lazy
+client-side bundle on diagram pages. Diagram animation must remain explanatory,
+brief, and safe as progressive enhancement. Rendering and comprehension cannot
+depend on motion, and any animation failure must leave the completed SVG
+visible.

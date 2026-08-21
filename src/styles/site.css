@@ -105,12 +105,28 @@ nav a[aria-current="page"] { text-decoration: underline; text-decoration-color: 
 .prose .article-figure { margin: 2.3rem auto 1rem; text-align: center; }
 .prose .article-figure img { margin: 0 auto .5rem; max-height: 25rem; object-fit: contain; }
 .prose .article-figure figcaption { color: var(--muted); font-size: .76rem; }
+.prose .mermaid-figure { background: #fff; border: 1px solid var(--line); border-radius: 8px; color: #18232c; margin: 1.7rem 0; min-height: 12rem; overflow-x: auto; padding: 1rem; }
+.prose .mermaid-figure.is-loading { align-items: center; display: flex; justify-content: center; }
+.prose .mermaid-figure.is-loading::before { color: #5e6c77; content: "Rendering diagram..."; font-family: var(--mono); font-size: .7rem; }
+.prose .mermaid-figure.is-loading .mermaid-diagram { height: 0; overflow: hidden; visibility: hidden; width: 0; }
+.prose .mermaid-diagram { min-width: 0; }
+.prose .mermaid-diagram svg { display: block; height: auto; margin: 0 auto; max-width: 100%; }
+.prose .mermaid-fallback { background: var(--code); color: #e5edf5; font-family: var(--mono); font-size: .75rem; margin: 0; overflow: auto; padding: 1rem; white-space: pre-wrap; }
 
-.prose table { background: var(--card); border: 1px solid var(--line); border-collapse: separate; border-radius: 8px; border-spacing: 0; display: block; font-size: .88rem; margin: 1.6rem 0; min-width: 620px; overflow-x: auto; width: 100%; }
+.prose table { background: var(--card); border: 1px solid var(--line); border-collapse: separate; border-radius: 8px; border-spacing: 0; display: table; font-size: .88rem; margin: 1.6rem 0; max-width: 100%; min-width: 0; table-layout: auto; width: 100%; }
 .prose thead { background: var(--ink); color: var(--paper); }
-.prose th { font-family: var(--mono); font-size: .66rem; letter-spacing: .065em; padding: .7rem .8rem; text-align: left; text-transform: uppercase; white-space: nowrap; }
-.prose td { border-top: 1px solid var(--line); padding: .7rem .8rem; vertical-align: top; }
+.prose th { font-family: var(--mono); font-size: .66rem; letter-spacing: .065em; overflow-wrap: anywhere; padding: .7rem .8rem; text-align: left; text-transform: uppercase; white-space: normal; }
+.prose td { border-top: 1px solid var(--line); overflow-wrap: anywhere; padding: .7rem .8rem; vertical-align: top; }
 .prose tbody tr:nth-child(even) { background: var(--soft); }
+.prose .benchmark-table-wrap { margin: 1.6rem 0; max-width: 100%; overflow-x: auto; }
+.prose .benchmark-table { display: table; margin: 0; min-width: 760px; table-layout: fixed; width: 100%; }
+.prose .benchmark-table thead th { line-height: 1.35; overflow-wrap: anywhere; text-align: center; vertical-align: middle; white-space: normal; }
+.prose .benchmark-table thead th:first-child { text-align: left; width: 30%; }
+.prose .benchmark-table thead th:not(:first-child) { width: 17.5%; }
+.prose .benchmark-table tbody th { border-top: 1px solid var(--line); font-family: var(--sans); font-size: .88rem; font-weight: 650; letter-spacing: normal; padding: .7rem .8rem; text-transform: none; }
+.prose .benchmark-table td { text-align: right; }
+.prose .benchmark-table .best-score { background: color-mix(in srgb, var(--accent) 24%, var(--card)); box-shadow: inset 3px 0 0 var(--accent); color: var(--ink); }
+.prose .benchmark-table .best-score-label { color: var(--accent); display: block; font-family: var(--mono); font-size: .56rem; font-weight: 750; letter-spacing: .06em; margin-top: .12rem; text-transform: uppercase; }
 .prose .timeline-table { margin: 1.4rem 0 2.2rem; overflow-x: auto; }
 .prose .timeline-table table { display: table; margin: 0; table-layout: auto; }
 .prose .timeline-table td:first-child { font-weight: 650; }
@@ -177,6 +193,7 @@ nav a[aria-current="page"] { text-decoration: underline; text-decoration-color: 
   .article { padding: 2.7rem 0; }
   .article header { margin-bottom: 1.8rem; }
   .prose { font-size: .96rem; }
+  .prose .mermaid-figure { padding: .65rem; }
   .prose .timeline-table { overflow: visible; }
   .prose .timeline-table table { min-width: 0; width: 100%; }
   .prose .timeline-table thead { display: none; }
@@ -201,4 +218,8 @@ nav a[aria-current="page"] { text-decoration: underline; text-decoration-color: 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+}
+
+@media print {
+  .prose .mermaid-diagram svg { opacity: 1 !important; }
 }

@@ -7,6 +7,7 @@ const postSchema = z.object({
   date: z.string(),
   updated: z.string().optional(),
   legacy_url: z.string(),
+  research_id: z.string().regex(/^AR_[0-9]{4,}$/).optional(),
   source_id: z.string().optional(),
   author: z.string().optional(),
   labels: z.array(z.string()).default([]),
