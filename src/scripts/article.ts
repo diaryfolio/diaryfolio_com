@@ -56,6 +56,87 @@ const animateMermaidDiagrams = async (diagrams: HTMLElement[]) => {
   }
 };
 
+const revealInlineSvg = (figure: HTMLElement) => {
+  figure.querySelectorAll<SVGElement>('[data-svg-step], [data-svg-link]').forEach((element) => {
+    element.style.removeProperty('opacity');
+    element.style.removeProperty('transform');
+    element.style.removeProperty('stroke-dasharray');
+    element.style.removeProperty('stroke-dashoffset');
+  });
+};
+
+const playInlineSvg = (
+  figure: HTMLElement,
+  animate: typeof import('motion').animate
+) => {
+  const steps = Array.from(figure.querySelectorAll<SVGElement>('[data-svg-step]'));
+  const links = Array.from(figure.querySelectorAll<SVGGeometryElement>('[data-svg-link]'));
+  const replay = figure.querySelector<HTMLButtonElement>('[data-svg-replay]');
+
+  replay?.setAttribute('disabled', '');
+  [...steps, ...links].forEach((element) => {
+    element.style.opacity = '0';
+  });
+
+  const animations = [
+    ...steps.map((step, index) => animate(
+      step,
+      { opacity: [0, 1], transform: ['translateY(10px)', 'translateY(0)'] },
+      { delay: index * 0.2, duration: 0.42, ease: 'easeOut' }
+    )),
+    ...links.map((link, index) => animate(
+      link,
+      { opacity: [0, 1], pathLength: [0, 1] },
+      { delay: 0.12 + index * 0.2, duration: 0.38, ease: 'easeInOut' }
+    ))
+  ];
+
+  Promise.allSettled(animations.map((animation) => animation.finished))
+    .then(() => {
+      revealInlineSvg(figure);
+      replay?.removeAttribute('disabled');
+    });
+};
+
+const animateInlineSvgs = async () => {
+  const figures = Array.from(document.querySelectorAll<HTMLElement>('.article-svg-figure[data-animate-svg]'));
+
+  if (figures.length === 0) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    figures.forEach((figure) => {
+      figure.querySelector<HTMLButtonElement>('[data-svg-replay]')?.setAttribute('hidden', '');
+    });
+    return;
+  }
+
+  figures.forEach((figure) => {
+    figure.querySelectorAll<SVGElement>('[data-svg-step], [data-svg-link]').forEach((element) => {
+      element.style.opacity = '0';
+    });
+  });
+
+  try {
+    const { animate, inView } = await import('motion');
+
+    figures.forEach((figure) => {
+      const replay = figure.querySelector<HTMLButtonElement>('[data-svg-replay]');
+      replay?.removeAttribute('hidden');
+      replay?.addEventListener('click', () => playInlineSvg(figure, animate));
+
+      inView(figure, () => {
+        playInlineSvg(figure, animate);
+      }, { amount: 0.2 });
+    });
+  } catch (error) {
+    figures.forEach((figure) => {
+      revealInlineSvg(figure);
+      figure.querySelector<HTMLButtonElement>('[data-svg-replay]')?.setAttribute('hidden', '');
+    });
+    console.error('Inline SVG animation could not be prepared.', error);
+  }
+};
+
 const prepareMermaidDiagrams = async () => {
   const diagramBlocks = Array.from(document.querySelectorAll<HTMLElement>('.prose pre'))
     .filter((pre) => pre.dataset.language === 'mermaid' || Boolean(pre.querySelector(':scope > code.language-mermaid')));
@@ -172,5 +253,6 @@ const enhanceCodeBlocks = () => {
 
 export const enhanceArticle = async () => {
   await prepareMermaidDiagrams();
+  await animateInlineSvgs();
   enhanceCodeBlocks();
 };

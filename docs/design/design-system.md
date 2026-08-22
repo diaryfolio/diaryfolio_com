@@ -43,6 +43,13 @@ Technical metadata, tags, dates, code labels, and the footer use the system mono
   visual structure makes comparison, sequence, architecture, or dependency
   materially easier to understand. Visuals are informative rather than
   decorative.
+- For a justified diagram, the preferred evaluation order is: a purpose-built
+  animated inline SVG when progressive reveal improves understanding; a static
+  inline SVG when motion adds no value or is impractical; then Mermaid when its
+  maintained syntax is the clearer or more economical representation. This is
+  a decision order, not a requirement to animate every visual. Accessibility,
+  a complete static state, narrow-screen readability, and reduced-motion
+  behaviour override the preference.
 - Fenced `mermaid` blocks are enhanced into SVG on article pages. Mermaid is
   loaded lazily only when a diagram exists, uses strict security and a fixed
   high-contrast neutral canvas, and makes no third-party CDN request. Every
@@ -55,6 +62,15 @@ Technical metadata, tags, dates, code labels, and the footer use the system mono
   charts without suitable stroke geometry receive only the short reveal. The
   effect does not loop and is not a reason to add an otherwise unnecessary
   visual.
+- A purpose-built inline SVG may use `article-svg-figure` with
+  `data-animate-svg` when its labelled structure is clearer than Mermaid. Child
+  elements marked `data-svg-step` reveal in reading order and
+  `data-svg-link` strokes draw between them. The complete accessible SVG is
+  present in the article HTML, stays useful without JavaScript, reveals once,
+  and skips motion when the reader requests reduced motion. A compact Replay
+  control with a refresh icon is enabled only after Motion loads; it restarts
+  that diagram on demand, disables while running, and remains hidden for
+  reduced-motion readers or enhancement failures.
 - Researched articles lead with a compact **Quick read** containing the main
   answer, useful takeaways, and a material caveat.
 - Facts, vendor claims, independent evidence, inference, and uncertainty stay
@@ -81,7 +97,7 @@ Technical metadata, tags, dates, code labels, and the footer use the system mono
 - Inline code uses a low-contrast panel and monospace type.
 - Block code uses a dark, high-contrast panel with a small toolbar.
 - Long snippets collapse by default and expose Expand/Collapse and Copy controls.
-- Standard article tables use the full reading-column width and wrap long cell content so their visual grid reaches the table border without creating an empty strip. Tables intentionally wider than the reading column use a dedicated horizontal-scroll wrapper; the curated timeline table becomes labelled cards on small screens.
+- Standard article tables use the full reading-column width and wrap long cell content so their visual grid reaches the table border without creating an empty strip. Tables intentionally wider than the reading column use the reusable `wide-table-wrap` and `wide-table` horizontal-scroll pattern; the curated timeline table becomes labelled cards on small screens.
 - Benchmark tables fill the reading column on wide screens and scroll inside a dedicated container on narrow screens. The benchmark-name column receives 30% of the table width; comparison columns divide the remainder evenly, and long model names wrap instead of distorting the grid. Leaders use a shaded cell, accent edge, bold value, and a visible text label so the distinction remains clear without relying on colour alone.
 - Mermaid diagrams render inside a bordered, horizontally contained figure.
   SVG output scales to the reading column, while any exceptional intrinsic
