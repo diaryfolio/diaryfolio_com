@@ -136,3 +136,45 @@ client-side bundle on diagram pages. Diagram animation must remain explanatory,
 brief, and safe as progressive enhancement. Rendering and comprehension cannot
 depend on motion, and any animation failure must leave the completed SVG
 visible.
+
+## D-012 - Purpose-built article SVGs share the progressive animation path
+
+**Status:** Accepted
+
+**Decision:** Allow accessible repository-authored inline SVG diagrams when a
+specific visual is clearer than Mermaid. Use the reusable `article-svg-figure`
+and `data-animate-svg` pattern, mark ordered content with `data-svg-step` and
+connectors with `data-svg-link`, and animate each diagram once through the
+existing local Motion dependency.
+
+**Why:** Some editorial graphics need deliberate labels, emphasis, and layout
+that are awkward to express in Mermaid. A shared enhancement pattern keeps the
+SVG static by default while allowing a restrained reading-order reveal.
+
+**Consequences:** Inline SVGs require an accessible title and description,
+must remain complete without JavaScript, may not loop, and must be checked at
+desktop and mobile widths. Reduced-motion visitors receive the finished static
+graphic. A user may replay the finite sequence through the shared accessible
+refresh control; the control is hidden when animation is unavailable or motion
+is reduced. Articles without Mermaid do not load Mermaid merely to animate an
+SVG.
+
+## D-013 - Evaluate animated SVG first for justified article diagrams
+
+**Status:** Accepted
+
+**Decision:** When an article genuinely benefits from a diagram, first assess
+whether a purpose-built animated inline SVG can explain the relationship in a
+clear progressive sequence. If animation is not useful or practical, prefer a
+static SVG. Use Mermaid when its supported syntax is clearer, more maintainable,
+or less error-prone than custom SVG markup.
+
+**Why:** The owner prefers compact, visual explanations and wants purposeful
+SVG motion to be considered before a generic chart. A fallback order prevents
+that preference from forcing decorative animation or brittle custom graphics.
+
+**Consequences:** Writers document the visual purpose before choosing a format.
+All formats require an accessible static state and responsive verification.
+Reduced-motion, clarity, accuracy, maintainability, and page weight take
+precedence over animation. A prose explanation or table remains better when no
+diagram materially improves the article.

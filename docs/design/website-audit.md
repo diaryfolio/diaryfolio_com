@@ -25,7 +25,7 @@ The audit covers the Astro source, 113 migrated posts, generated production HTML
 
 ## Generator decision
 
-Astro remains a build-time dependency only: GitHub Pages serves the generated HTML, CSS, and JavaScript without an Astro server. It is retained because the existing implementation already provides the blog-specific features this archive needs: chronological collections, cards, RSS, sitemap, legacy routes, structured metadata, and a custom searchable index. Mermaid and Motion are the additional direct runtime dependencies. Both are bundled locally: Mermaid is loaded lazily only on article pages containing a Mermaid diagram, and Motion is loaded only after such a diagram renders and the visitor has not requested reduced motion.
+Astro remains a build-time dependency only: GitHub Pages serves the generated HTML, CSS, and JavaScript without an Astro server. It is retained because the existing implementation already provides the blog-specific features this archive needs: chronological collections, cards, RSS, sitemap, legacy routes, structured metadata, and a custom searchable index. Mermaid and Motion are the additional direct runtime dependencies. Both are bundled locally: Mermaid is loaded lazily only on article pages containing a Mermaid diagram, and Motion is loaded only after a Mermaid or purpose-built inline SVG diagram is ready and the visitor has not requested reduced motion.
 
 Zensical was considered, but its current focus is technical documentation and its native blog functionality is still on its roadmap. Moving now would trade a completed static implementation for theme overrides and another content migration without reducing the deployed footprint.
 

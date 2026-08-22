@@ -43,6 +43,11 @@ Apply these rules whenever creating or materially editing an article:
 - Prefer a table for exact comparisons or repeated fields. Prefer a flow
   diagram for sequences, dependencies, architecture, or several interacting
   parts. A visual must replace or simplify prose, not decorate it.
+- When a diagram is justified, first consider a purpose-built animated inline
+  SVG if a progressive reveal materially improves comprehension. If custom
+  animation is not useful or practical, use a clear static SVG. Use Mermaid
+  when its supported syntax expresses the idea more clearly or maintainably
+  than a custom SVG. Every option must keep a complete accessible static state.
 - Mermaid diagrams use a fenced `mermaid` code block. Include Mermaid
   `accTitle` and `accDescr`, keep labels concise, and verify the rendered SVG
   in the production preview at desktop and mobile sizes. Use a repository-owned
@@ -50,8 +55,11 @@ Apply these rules whenever creating or materially editing an article:
 - Use an animated diagram when its progressive reveal helps explain a flow,
   sequence, dependency, architecture, or timeline. Do not add a chart merely
   to create motion. Mermaid SVG diagrams animate automatically once when they
-  enter the viewport, so article content must not include its own autoplay,
-  looping, or decorative animation instructions.
+  enter the viewport. A purpose-built inline SVG may use the documented
+  `article-svg-figure` and `data-animate-svg` pattern when Mermaid cannot express
+  the visual clearly. The shared pattern may expose its accessible user-started
+  Replay control. Article content must not include its own autoplay, looping,
+  or decorative animation instructions.
 - Keep tables and diagrams readable: concise labels, clear units, source and
   cutoff where relevant, useful alt text or caption, and no page-level
   horizontal overflow.
