@@ -1,0 +1,50 @@
+---
+interface Props {
+  googleAnalyticsId?: string;
+}
+
+const { googleAnalyticsId } = Astro.props;
+---
+
+{googleAnalyticsId && <script is:inline define:vars={{ googleAnalyticsId }}>
+  (() => {
+    const consentKey = 'diaryfolio-consent-v1';
+    const consentLifetime = 180 * 24 * 60 * 60 * 1000;
+    const consentState = (analyticsStorage) => ({
+      analytics_storage: analyticsStorage,
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
+    });
+
+    const readChoice = () => {
+      try {
+        const stored = JSON.parse(localStorage.getItem(consentKey));
+        if (!['granted', 'denied'].includes(stored?.analytics) || !Number.isFinite(stored?.updatedAt)) return null;
+        if (Date.now() - stored.updatedAt > consentLifetime) {
+          localStorage.removeItem(consentKey);
+          return null;
+        }
+        return stored.analytics;
+      } catch {
+        return null;
+      }
+    };
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+    window.gtag('consent', 'default', consentState('denied'));
+
+    if (readChoice() !== 'granted') return;
+
+    window.gtag('consent', 'update', consentState('granted'));
+    window.gtag('js', new Date());
+    window.gtag('config', googleAnalyticsId);
+
+    const script = document.createElement('script');
+    script.async = true;
+    script.dataset.diaryfolioAnalytics = '';
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(googleAnalyticsId)}`;
+    document.head.append(script);
+  })();
+</script>}

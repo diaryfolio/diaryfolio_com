@@ -1,5 +1,6 @@
 ---
 import '../styles/site.css';
+import AnalyticsHead from '../components/AnalyticsHead.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
 
 interface Props {
@@ -46,6 +47,7 @@ const siteStructuredData = {
 <!doctype html>
 <html lang="en">
   <head>
+    <AnalyticsHead googleAnalyticsId={googleAnalyticsId} />
     <script is:inline>
       try {
         const savedTheme = localStorage.getItem('diaryfolio-theme');

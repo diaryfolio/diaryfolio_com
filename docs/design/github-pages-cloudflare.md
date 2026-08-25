@@ -37,7 +37,7 @@ Use **DNS only** during GitHub's domain and certificate checks. GitHub Pages alr
 
 ## Google Analytics and AdSense
 
-GitHub Pages serves normal static HTML and JavaScript, so Google Analytics works normally. The Astro build includes the analytics consent UI only when `PUBLIC_GA_MEASUREMENT_ID` is present at build time. It does not emit a Google script tag in the generated HTML.
+GitHub Pages serves normal static HTML and JavaScript, so Google Analytics works normally. The Astro build includes the analytics consent UI only when `PUBLIC_GA_MEASUREMENT_ID` is present at build time. It initialises a denied consent state in the document head but does not emit or load a Google script tag before acceptance.
 
 DiaryFolio uses basic consent mode for Analytics:
 

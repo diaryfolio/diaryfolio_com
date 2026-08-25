@@ -118,7 +118,7 @@ Technical metadata, tags, dates, code labels, and the footer use the system mono
 
 ## Consent surfaces
 
-- The analytics consent panel is a compact fixed-bottom dialog that uses the existing card, colour, type, and focus systems.
+- The analytics consent panel is a small fixed-bottom notice that uses the existing card, colour, type, and focus systems. Its copy stays to one compact sentence on normal desktop widths and wraps above the actions on narrow screens.
 - Accept and reject are both explicit buttons; the banner has no preselected choice and does not seize focus on first display.
 - At narrow widths the content and controls stack, with both actions retaining comfortable touch targets and no horizontal overflow.
 - The footer always links to the privacy page. When Analytics is configured, it also exposes a persistent Cookie settings button so withdrawal is as accessible as acceptance.
