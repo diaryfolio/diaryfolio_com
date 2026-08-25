@@ -178,3 +178,23 @@ All formats require an accessible static state and responsive verification.
 Reduced-motion, clarity, accuracy, maintainability, and page weight take
 precedence over animation. A prose explanation or table remains better when no
 diagram materially improves the article.
+
+## D-014 - Use byte-budgeted article visuals
+
+**Status:** Accepted
+
+**Decision:** New articles do not receive a raster hero automatically. Prefer
+an optimized repository-owned SVG when a diagram communicates the subject
+adequately. When photography or raster detail is useful, resize the published
+asset for the reading column, normally use WebP or AVIF with a longest edge of
+960px, target 80 KB or less, and require a content-specific reason above 120 KB.
+
+**Why:** Article visuals should explain the subject without becoming the main
+page-weight cost. A source-resolution generated image provides no reader value
+when the page renders it at a much smaller size.
+
+**Consequences:** The first referenced `<img>` remains the homepage card image,
+so a static external SVG can serve both the article and card. Inline SVGs remain
+available for animation but are not card thumbnails. Writers verify actual
+dimensions, byte size, decoded quality, card appearance, and desktop/mobile
+rendering before handoff. SVGs may not hide embedded raster payloads.

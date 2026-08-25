@@ -12,18 +12,13 @@ const { googleAnalyticsId } = Astro.props;
     id="analytics-consent"
     role="dialog"
     aria-modal="false"
-    aria-labelledby="analytics-consent-title"
-    aria-describedby="analytics-consent-description"
+    aria-label="Analytics choice"
     hidden
   >
-    <div>
-      <p class="eyebrow">Optional analytics</p>
-      <h2 id="analytics-consent-title">Help improve DiaryFolio?</h2>
-      <p id="analytics-consent-description">
-        Analytics cookies help show which technical notes are useful. No analytics data is sent unless you accept.
-        <a href="/privacy.html">Privacy and cookies</a>
-      </p>
-    </div>
+    <p class="consent-message">
+      <strong>Optional analytics.</strong> Help improve DiaryFolio. Nothing is sent unless you accept.
+      {' '}<a href="/privacy.html">Details</a>
+    </p>
     <div class="consent-actions">
       <button type="button" id="accept-analytics">Accept analytics</button>
       <button type="button" id="reject-analytics">Reject</button>
@@ -80,15 +75,16 @@ const { googleAnalyticsId } = Astro.props;
       };
 
       const ensureGtag = () => {
+        const alreadyInitialised = typeof window.gtag === 'function';
         window.dataLayer = window.dataLayer || [];
         window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        if (!alreadyInitialised) window.gtag('consent', 'default', consentState('denied'));
       };
 
       const loadAnalytics = () => {
-        if (document.querySelector('script[data-diaryfolio-analytics]')) return;
         ensureGtag();
-        window.gtag('consent', 'default', consentState('denied'));
         window.gtag('consent', 'update', consentState('granted'));
+        if (document.querySelector('script[data-diaryfolio-analytics]')) return;
         window.gtag('js', new Date());
         window.gtag('config', googleAnalyticsId);
 

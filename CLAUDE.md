@@ -63,6 +63,17 @@ Apply these rules whenever creating or materially editing an article:
 - Keep tables and diagrams readable: concise labels, clear units, source and
   cutoff where relevant, useful alt text or caption, and no page-level
   horizontal overflow.
+- Do not add a raster hero by default. When an explanatory visual can replace
+  photography, prefer an accessible repository-owned SVG. Reference a static
+  SVG through an `<img>` when it should also become the homepage card thumbnail;
+  use inline SVG only when article-specific structure or animation requires it.
+  Do not embed raster data inside an SVG merely to change the file extension.
+- When a raster hero is justified, crop and resize it for the reading column
+  before publication. For a typical new article, use WebP or AVIF, keep the
+  longest edge at 960px unless the subject needs more detail, target 80 KB or
+  less, and treat anything above 120 KB as requiring an explicit content reason.
+  Record accurate intrinsic `width` and `height`, then verify image quality,
+  file size, the homepage thumbnail, and desktop/mobile article rendering.
 - Distinguish verified facts, vendor claims, independent evidence, inference,
   and uncertainty. Date volatile information and link important external
   sources directly.

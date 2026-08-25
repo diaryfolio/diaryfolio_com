@@ -18,7 +18,7 @@ The measurement ID is intentionally public in generated client-side code. Never 
 
 ### Consent behaviour
 
-When the measurement ID exists, the site renders an analytics-only consent panel but does not place the Google script in its initial HTML. It uses basic consent mode:
+When the measurement ID exists, the site initialises Google Consent Mode to `denied` in the document head but does not load Google code. It uses basic consent mode:
 
 - no choice: display the panel and send no analytics request;
 - accepted: grant `analytics_storage`, keep all advertising consent denied, and load GA4;
@@ -34,7 +34,9 @@ PUBLIC_GA_MEASUREMENT_ID=G-TEST12345 npm run build
 npm run preview
 ```
 
-Before acceptance, confirm there is no request to `googletagmanager.com` or `google-analytics.com` and no `_ga` cookie. Test acceptance, rejection, a subsequent page load, withdrawal through the footer, keyboard focus, and a narrow viewport. Google Tag Assistant can verify consent signals against the real measurement ID after deployment.
+Before acceptance, confirm there is no request to `googletagmanager.com` or `google-analytics.com` and no `_ga` cookie. After acceptance, confirm that `gtag/js?id=...` loads and that the Network panel shows a request to `google-analytics.com/g/collect`. Test rejection, a subsequent page load, withdrawal through the footer, keyboard focus, and a narrow viewport.
+
+Use the GA4 Realtime report for an ordinary production check. DebugView requires debug mode: connect the site through [Google Tag Assistant](https://tagassistant.google.com/) before opening DebugView. Merely opening the site and accepting analytics does not mark normal events as debug events.
 
 ## Google AdSense
 

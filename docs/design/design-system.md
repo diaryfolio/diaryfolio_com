@@ -91,6 +91,24 @@ Technical metadata, tags, dates, code labels, and the footer use the system mono
 - Thumbnails are decorative because the linked title already names the destination.
 - Cards without an image retain the same textual hierarchy without an empty placeholder.
 - Full article images are width-constrained, bordered, and allowed to preserve their natural aspect ratio.
+- New articles do not require a raster hero. An accessible, repository-owned
+  static SVG is preferred when a diagram communicates the subject as well as
+  photography. Referencing that SVG through an `<img>` lets the existing card
+  extractor reuse it on the homepage. Inline SVG remains appropriate for
+  article-only or animated diagrams, but is not extracted as a card thumbnail.
+- SVG assets contain real vector geometry and no embedded base64 or linked
+  raster payload used merely to disguise image weight. They are responsive,
+  have useful alternative text when referenced as images, and are checked in
+  the homepage card as well as the article.
+- A typical new raster hero is cropped to the intended composition, encoded as
+  WebP or AVIF, and limited to a 960px longest edge unless fine detail requires
+  more. The normal target is at most 80 KB. Files above 120 KB require an
+  explicit content reason and a recorded visual check showing that a smaller
+  version is not adequate. Intrinsic width and height in article markup match
+  the final file.
+- Image QA checks decoded appearance, byte size, desktop and mobile rendering,
+  and the homepage thumbnail. A diagram or text-only card is preferable to a
+  decorative duplicate asset.
 
 ## Code and data
 
@@ -118,7 +136,7 @@ Technical metadata, tags, dates, code labels, and the footer use the system mono
 
 ## Consent surfaces
 
-- The analytics consent panel is a compact fixed-bottom dialog that uses the existing card, colour, type, and focus systems.
+- The analytics consent panel is a small fixed-bottom notice that uses the existing card, colour, type, and focus systems. Its copy stays to one compact sentence on normal desktop widths and wraps above the actions on narrow screens.
 - Accept and reject are both explicit buttons; the banner has no preselected choice and does not seize focus on first display.
 - At narrow widths the content and controls stack, with both actions retaining comfortable touch targets and no horizontal overflow.
 - The footer always links to the privacy page. When Analytics is configured, it also exposes a persistent Cookie settings button so withdrawal is as accessible as acceptance.
