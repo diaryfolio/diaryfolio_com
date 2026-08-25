@@ -91,6 +91,7 @@ Technical metadata, tags, dates, code labels, and the footer use the system mono
 - Thumbnails are decorative because the linked title already names the destination.
 - Cards without an image retain the same textual hierarchy without an empty placeholder.
 - Full article images are width-constrained, bordered, and allowed to preserve their natural aspect ratio.
+- Article video embeds use the reusable `article-video` class so a 16:9 player fills the reading column without overflowing or becoming too tall on small screens. Prefer privacy-enhanced provider URLs when available.
 - New articles do not require a raster hero. An accessible, repository-owned
   static SVG is preferred when a diagram communicates the subject as well as
   photography. Referencing that SVG through an `<img>` lets the existing card
