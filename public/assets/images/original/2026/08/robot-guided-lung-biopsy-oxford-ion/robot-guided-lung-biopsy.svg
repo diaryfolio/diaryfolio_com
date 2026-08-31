@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="480" viewBox="0 0 960 480" role="img" aria-labelledby="title desc">
+  <title id="title">A route through the airways</title>
+  <desc id="desc">Schematic lungs with a teal catheter following an airway towards an orange nodule. A small control panel represents the clinician's steering controls, not an autonomous robot.</desc>
+  <rect width="960" height="480" rx="20" fill="#edf2f4"/>
+  <g fill="none" stroke="#d5e0e4" stroke-width="1">
+    <path d="M0 80H960M0 160H960M0 240H960M0 320H960M0 400H960M120 0V480M240 0V480M360 0V480M480 0V480M600 0V480M720 0V480M840 0V480"/>
+  </g>
+  <text x="44" y="60" fill="#087286" font-family="system-ui,sans-serif" font-size="20" font-weight="700" letter-spacing="2">MEDICAL ROBOTICS</text>
+  <text x="44" y="110" fill="#18232c" font-family="system-ui,sans-serif" font-size="32" font-weight="700">A route through</text>
+  <text x="44" y="150" fill="#18232c" font-family="system-ui,sans-serif" font-size="32" font-weight="700">the airways</text>
+  <rect x="44" y="200" width="264" height="162" rx="14" fill="#182f3a"/>
+  <rect x="62" y="218" width="228" height="80" rx="6" fill="#d7eaec"/>
+  <path d="M94 269L142 240L180 265L253 235" fill="none" stroke="#087286" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="254" cy="235" r="7" fill="#b44a35"/>
+  <circle cx="106" cy="330" r="15" fill="#a8c6cf"/>
+  <path d="M150 320H270M150 339H221" stroke="#a8c6cf" stroke-width="6" stroke-linecap="round"/>
+  <text x="44" y="400" fill="#455760" font-family="system-ui,sans-serif" font-size="21">Doctor-controlled navigation</text>
+  <g fill="#d3e3e8" stroke="#8ba8b2" stroke-width="3">
+    <path d="M612 106C570 76 508 117 473 190C439 260 423 351 465 388C506 421 571 382 598 348C620 318 621 187 612 106Z"/>
+    <path d="M660 106C702 76 764 117 799 190C833 260 849 351 807 388C766 421 701 382 674 348C652 318 651 187 660 106Z"/>
+  </g>
+  <g fill="none" stroke="#6e8f9b" stroke-width="13" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M636 66V182L557 253L514 330M557 253L560 343M636 182L714 251L758 330M714 251L711 343"/>
+    <path d="M580 232L539 205M697 232L745 205" stroke-width="8"/>
+  </g>
+  <path d="M634 68V177Q634 184 643 191L702 245Q714 254 721 266L750 315" fill="none" stroke="#e9fcfd" stroke-width="10" stroke-linecap="round"/>
+  <path d="M634 68V177Q634 184 643 191L702 245Q714 254 721 266L750 315" fill="none" stroke="#087286" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="762" cy="335" r="14" fill="#b44a35" stroke="#fff" stroke-width="3"/>
+  <path d="M780 335H891" stroke="#b44a35" stroke-width="2"/>
+  <text x="823" y="322" fill="#873b2c" font-family="system-ui,sans-serif" font-size="21" font-weight="700">Nodule</text>
+  <text x="472" y="447" fill="#455760" font-family="system-ui,sans-serif" font-size="18">Schematic only. Not to scale.</text>
+</svg>
