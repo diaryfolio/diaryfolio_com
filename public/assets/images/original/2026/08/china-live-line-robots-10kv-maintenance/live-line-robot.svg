@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Robotic arms beside an overhead distribution line</title>
+  <desc id="desc">Original illustration of two specialised robotic arms on a truck-mounted lift near a 10 kV overhead line. A ground operator uses a control terminal. This is a conceptual illustration, not a photograph, wiring diagram or depiction of a particular robot model.</desc>
+  <rect width="960" height="540" rx="16" fill="#edf3f5"/>
+  <path d="M0 422H960V540H0Z" fill="#dce6e9"/>
+  <path d="M0 462H960" stroke="#b9cbd1" stroke-width="2"/>
+  <g fill="#d4e2e7">
+    <path d="M40 418V310H92V287H132V418ZM102 418V335H238V418ZM710 418V331H813V302H876V418Z"/>
+    <path d="M22 321H147V334H22ZM699 343H892V355H699Z"/>
+  </g>
+  <text x="40" y="47" fill="#182f3a" font-family="system-ui, sans-serif" font-size="24" font-weight="700">Robotic line work, human supervision</text>
+  <g fill="none" stroke-linecap="round">
+    <path d="M822 97V423" stroke="#91a6af" stroke-width="16"/>
+    <path d="M783 151H862" stroke="#708994" stroke-width="10"/>
+    <path d="M809 135H835M808 143H836" stroke="#597584" stroke-width="5"/>
+    <path d="M38 117Q400 134 820 125L934 119" stroke="#244857" stroke-width="5"/>
+  </g>
+  <rect x="649" y="68" width="271" height="36" rx="8" fill="#fff"/>
+  <text x="785" y="92" text-anchor="middle" fill="#245b6b" font-family="system-ui, sans-serif" font-size="20">10 kV distribution line</text>
+  <g stroke-linejoin="round">
+    <path d="M537 374L709 299L449 248" fill="none" stroke="#839da8" stroke-width="32"/>
+    <path d="M537 374L709 299L449 248" fill="none" stroke="#fff" stroke-width="23"/>
+    <circle cx="709" cy="299" r="17" fill="#fff" stroke="#839da8" stroke-width="4"/>
+    <circle cx="709" cy="299" r="7" fill="#245b6b"/>
+    <path d="M373 235H508L494 274H387Z" fill="#fff" stroke="#839da8" stroke-width="3"/>
+    <rect x="394" y="214" width="90" height="24" rx="5" fill="#245b6b"/>
+    <path d="M408 215L364 178L413 143M470 215L538 182L509 146" fill="none" stroke="#9b432e" stroke-width="20"/>
+    <path d="M408 215L364 178L413 143M470 215L538 182L509 146" fill="none" stroke="#e99a55" stroke-width="12"/>
+    <g fill="#edf3f5" stroke="#245b6b" stroke-width="4">
+      <circle cx="408" cy="215" r="11"/><circle cx="364" cy="178" r="11"/>
+      <circle cx="470" cy="215" r="11"/><circle cx="538" cy="182" r="11"/>
+    </g>
+    <g fill="none" stroke="#244857" stroke-width="6" stroke-linecap="round">
+      <path d="M413 143L429 132M509 146L494 133"/>
+      <path d="M422 126L432 123L439 134M484 132L490 123L501 127"/>
+    </g>
+    <path d="M442 213V184" stroke="#245b6b" stroke-width="6"/>
+    <rect x="427" y="175" width="29" height="18" rx="5" fill="#245b6b"/>
+    <circle cx="448" cy="183" r="5" fill="#7dd1d9"/>
+  </g>
+  <g font-family="system-ui, sans-serif" font-size="20" fill="#245b6b">
+    <text x="183" y="190">Robotic arms</text>
+    <path d="M310 184L344 179" stroke="#728f9b" stroke-width="2" fill="none"/>
+    <text x="602" y="230">Truck-mounted lift</text>
+    <path d="M656 240L660 271" stroke="#728f9b" stroke-width="2" fill="none"/>
+  </g>
+  <g stroke="#245b6b" stroke-width="3" stroke-linejoin="round">
+    <path d="M353 378V348H429L457 378V423H339V389Z" fill="#edb462"/>
+    <path d="M367 357H418L437 378H367Z" fill="#d8eff4"/>
+    <rect x="457" y="374" width="184" height="49" rx="4" fill="#edb462"/>
+    <rect x="495" y="352" width="85" height="29" rx="5" fill="#245b6b"/>
+    <path d="M472 422L455 449H436M625 422L645 449H665" fill="none" stroke-width="6"/>
+    <circle cx="381" cy="425" r="23" fill="#24414d"/>
+    <circle cx="597" cy="425" r="23" fill="#24414d"/>
+    <circle cx="381" cy="425" r="10" fill="#b6c9d0"/>
+    <circle cx="597" cy="425" r="10" fill="#b6c9d0"/>
+  </g>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <path d="M189 410L183 446M205 410L212 446" fill="none" stroke="#294e60" stroke-width="12"/>
+    <path d="M183 371H208L213 411H181Z" fill="#087286"/>
+    <path d="M190 384L216 398L238 382" fill="none" stroke="#087286" stroke-width="12"/>
+    <circle cx="195" cy="356" r="13" fill="#aa7352"/>
+    <path d="M179 353Q179 332 195 332Q211 332 211 353Z" fill="#edb462"/>
+    <path d="M176 353H214" stroke="#9b672e" stroke-width="4"/>
+    <path d="M225 367L255 372L250 391L220 385Z" fill="#244857" stroke="#fff" stroke-width="2"/>
+    <path d="M227 373L249 377" stroke="#80cfda" stroke-width="3"/>
+  </g>
+  <text x="40" y="392" fill="#245b6b" font-family="system-ui, sans-serif" font-size="20">Ground control</text>
+  <path d="M260 354Q290 277 372 254" fill="none" stroke="#087286" stroke-width="3" stroke-dasharray="7 7"/>
+  <path d="M358 252L373 254L366 267" fill="none" stroke="#087286" stroke-width="3"/>
+  <text x="480" y="505" text-anchor="middle" fill="#425f6c" font-family="system-ui, sans-serif" font-size="18">Concept illustration. Not a wiring diagram or a specific robot model.</text>
+</svg>
