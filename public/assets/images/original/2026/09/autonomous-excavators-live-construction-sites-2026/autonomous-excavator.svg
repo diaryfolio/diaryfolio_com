@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Autonomous excavator working inside a managed construction zone</title>
+  <desc id="desc">A site plan flows to a monitored excavator work zone. A human supervisor stands outside the zone with a tablet while an excavator loads earth. The drawing is conceptual, not a product diagram.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#dcecf0"/>
+      <stop offset="1" stop-color="#f6f3e8"/>
+    </linearGradient>
+    <pattern id="zone" width="18" height="18" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="18" stroke="#0d7888" stroke-width="5" opacity=".12"/>
+    </pattern>
+  </defs>
+  <rect width="960" height="540" rx="20" fill="url(#sky)"/>
+  <path d="M0 368C190 330 330 380 500 348s305-21 460 18v174H0Z" fill="#c6ab78"/>
+  <path d="M0 420c186-34 326 11 496-14 154-23 292-11 464 19v115H0Z" fill="#a77d4f"/>
+  <rect x="292" y="88" width="576" height="338" rx="26" fill="url(#zone)" stroke="#0d7888" stroke-width="4" stroke-dasharray="12 10"/>
+  <rect x="42" y="48" width="216" height="126" rx="14" fill="#fff" stroke="#8aa3aa" stroke-width="3"/>
+  <path d="M68 80h78v58H68z" fill="#e8f1f3" stroke="#0d7888" stroke-width="3"/>
+  <path d="m76 127 23-26 17 15 23-27" fill="none" stroke="#0d7888" stroke-width="5"/>
+  <path d="M167 82h65M167 104h65M167 126h48" stroke="#52656b" stroke-width="7" stroke-linecap="round"/>
+  <text x="150" y="158" font-family="system-ui, sans-serif" font-size="17" font-weight="700" text-anchor="middle" fill="#1b2b31">SITE MANAGER PLAN</text>
+  <path d="M258 111h70" fill="none" stroke="#0d7888" stroke-width="5"/>
+  <path d="m318 99 16 12-16 12" fill="none" stroke="#0d7888" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <g transform="translate(390 184)">
+    <rect x="24" y="153" width="248" height="58" rx="26" fill="#27363c"/>
+    <circle cx="72" cy="182" r="32" fill="#172126" stroke="#6f8188" stroke-width="8"/>
+    <circle cx="222" cy="182" r="32" fill="#172126" stroke="#6f8188" stroke-width="8"/>
+    <path d="M55 153h157l-29-81H94Z" fill="#e2a52d" stroke="#7c5a1d" stroke-width="4"/>
+    <path d="M119 72h64l20 58h-96Z" fill="#9ad0db" stroke="#334b54" stroke-width="4"/>
+    <rect x="80" y="86" width="20" height="48" fill="#e2a52d"/>
+    <path d="M170 79 276 31l18 24-91 88" fill="none" stroke="#d99b25" stroke-width="25" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="m290 47 76 79" fill="none" stroke="#d99b25" stroke-width="21" stroke-linecap="round"/>
+    <path d="m352 115 54 17-28 42-49-23Z" fill="#79512f" stroke="#4d3625" stroke-width="4"/>
+    <circle cx="88" cy="56" r="9" fill="#1aa6b7"/>
+    <circle cx="207" cy="119" r="9" fill="#1aa6b7"/>
+    <path d="M76 49q12-22 24 0M195 112q12-22 24 0" fill="none" stroke="#1aa6b7" stroke-width="4"/>
+  </g>
+  <g fill="#79512f">
+    <path d="m735 364 38-88 32 88Z"/>
+    <path d="m786 365 48-112 38 112Z"/>
+  </g>
+  <g transform="translate(80 276)">
+    <circle cx="64" cy="28" r="18" fill="#c18b63"/>
+    <path d="M44 49h40l17 91H28Z" fill="#e36c38" stroke="#4d342d" stroke-width="4"/>
+    <path d="M39 73 7 122M87 73l35 39" stroke="#4d342d" stroke-width="9" stroke-linecap="round"/>
+    <path d="M48 139 31 205M81 139l24 66" stroke="#28363b" stroke-width="12" stroke-linecap="round"/>
+    <rect x="105" y="92" width="72" height="48" rx="6" fill="#e8f1f3" stroke="#0d7888" stroke-width="4" transform="rotate(-8 141 116)"/>
+    <path d="M119 108h42M119 121h32" stroke="#0d7888" stroke-width="4"/>
+  </g>
+  <path d="M228 306c23-64 52-92 90-111" fill="none" stroke="#0d7888" stroke-width="4" stroke-dasharray="8 9"/>
+  <text x="122" y="502" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#172126">HUMAN SUPERVISION</text>
+  <text x="580" y="106" font-family="system-ui, sans-serif" font-size="20" font-weight="800" text-anchor="middle" fill="#0a6370">MONITORED WORK ZONE</text>
+  <rect x="627" y="445" width="287" height="58" rx="12" fill="#172126" opacity=".92"/>
+  <text x="770" y="469" font-family="system-ui, sans-serif" font-size="16" text-anchor="middle" fill="#f3f7f8">RETROFIT + ASSIGNED TASK</text>
+  <text x="770" y="491" font-family="system-ui, sans-serif" font-size="16" text-anchor="middle" fill="#f3f7f8">NOT AN UNMANAGED SITE</text>
+</svg>

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Simplified Supercritical UV wastewater disinfection flow</title>
+  <desc id="desc">Higher wet-weather flow enters a module, becomes a thin fast sheet beneath ultraviolet lamps, and leaves for monitored discharge. Ultraviolet light inactivates microorganisms but is not shown removing nutrients or solids.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e8f4f5"/>
+      <stop offset="1" stop-color="#f5f1e7"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3b95a9"/>
+      <stop offset="1" stop-color="#8dd7df"/>
+    </linearGradient>
+    <linearGradient id="uv" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a63d2" stop-opacity=".75"/>
+      <stop offset="1" stop-color="#c6b1f0" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" rx="20" fill="url(#bg)"/>
+  <text x="480" y="51" text-anchor="middle" font-family="system-ui, sans-serif" font-size="27" font-weight="800" fill="#18323a">A COMPACT DISINFECTION STAGE</text>
+  <g transform="translate(36 130)">
+    <rect width="214" height="234" rx="20" fill="#fff" stroke="#84a3aa" stroke-width="3"/>
+    <path d="M30 118c28-24 51 24 79 0s51 24 79 0v62H30Z" fill="url(#water)"/>
+    <path d="M30 99c28-24 51 24 79 0s51 24 79 0" fill="none" stroke="#2b8094" stroke-width="7"/>
+    <path d="M58 70c-7-18 8-23 1-41M111 73c-7-18 8-23 1-41M162 70c-7-18 8-23 1-41" fill="none" stroke="#2b8094" stroke-width="5" stroke-linecap="round"/>
+    <text x="107" y="204" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="800" fill="#18323a">HIGHER FLOW</text>
+    <text x="107" y="226" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#52676d">during heavy rain</text>
+  </g>
+  <path d="M250 247h89" stroke="#247c8f" stroke-width="13"/>
+  <path d="m329 229 25 18-25 18" fill="#247c8f"/>
+  <g transform="translate(347 91)">
+    <rect width="364" height="334" rx="24" fill="#17262c" stroke="#45616a" stroke-width="4"/>
+    <rect x="22" y="28" width="320" height="62" rx="12" fill="#2c3f47"/>
+    <rect x="47" y="46" width="74" height="18" rx="9" fill="#d6cbff"/>
+    <rect x="145" y="46" width="74" height="18" rx="9" fill="#d6cbff"/>
+    <rect x="243" y="46" width="74" height="18" rx="9" fill="#d6cbff"/>
+    <path d="M84 65 44 212h80ZM182 65l-40 147h80ZM280 65l-40 147h80Z" fill="url(#uv)"/>
+    <path d="M29 221h305" stroke="#7ed5df" stroke-width="22"/>
+    <path d="M29 221c36-15 58 15 94 0s58 15 94 0 58 15 94 0" fill="none" stroke="#d7f9fb" stroke-width="5"/>
+    <g fill="#aa5d46">
+      <circle cx="74" cy="207" r="7"/><circle cx="154" cy="230" r="7"/><circle cx="240" cy="204" r="7"/><circle cx="301" cy="230" r="7"/>
+    </g>
+    <g stroke="#f3d66f" stroke-width="3">
+      <path d="m66 199 16 16m0-16-16 16m80 7 16 16m0-16-16 16m86-42 16 16m0-16-16 16m53 10 16 16m0-16-16 16"/>
+    </g>
+    <text x="182" y="270" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="800" fill="#f2f7f8">THIN, FAST LIQUID SHEET</text>
+    <text x="182" y="300" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17" fill="#bcd0d5">UV light delivered from above</text>
+    <text x="182" y="323" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#bcd0d5">microorganisms are inactivated</text>
+  </g>
+  <path d="M711 247h86" stroke="#247c8f" stroke-width="13"/>
+  <path d="m788 229 25 18-25 18" fill="#247c8f"/>
+  <g transform="translate(806 130)">
+    <rect width="118" height="234" rx="20" fill="#fff" stroke="#84a3aa" stroke-width="3"/>
+    <path d="M17 110c19-16 34 16 52 0s31 16 32 0v61H17Z" fill="url(#water)"/>
+    <path d="M17 94c19-16 34 16 52 0s31 16 32 0" fill="none" stroke="#2b8094" stroke-width="6"/>
+    <circle cx="59" cy="58" r="23" fill="#e6f4e7" stroke="#3c8b52" stroke-width="4"/>
+    <path d="m48 58 8 8 16-19" fill="none" stroke="#3c8b52" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="59" y="201" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#18323a">MONITORED</text>
+    <text x="59" y="222" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#18323a">OUTFLOW</text>
+  </g>
+  <rect x="54" y="454" width="852" height="52" rx="12" fill="#fff" stroke="#a7b8bc" stroke-width="2"/>
+  <text x="480" y="477" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#18323a">UV DISINFECTS. IT DOES NOT BY ITSELF REMOVE NUTRIENTS, SALTS OR SUSPENDED SOLIDS.</text>
+  <text x="480" y="496" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#52676d">Simplified process illustration, not Kaiwaka's engineering layout.</text>
+</svg>
