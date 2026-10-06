@@ -2,6 +2,7 @@
 title: "Debug a live Linux system with eBPF and bpftrace"
 date: "2026-09-13T09:50:00.000Z"
 legacy_url: "/2026/09/ebpf-bpftrace-live-linux-debugging.html"
+research_id: "AR_1023"
 author: "df"
 labels:
   - "Linux"

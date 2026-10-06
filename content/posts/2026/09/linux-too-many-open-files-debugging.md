@@ -2,6 +2,7 @@
 title: "Too many open files: find the real Linux leak"
 date: "2026-09-13T09:40:00.000Z"
 legacy_url: "/2026/09/linux-too-many-open-files-debugging.html"
+research_id: "AR_1022"
 author: "df"
 labels:
   - "Linux"
@@ -190,4 +191,3 @@ A useful alert includes the process start time. A count that resets after every 
 | [`proc_sys_fs(5)`](https://man7.org/linux/man-pages/man5/proc_sys_fs.5.html) | Host file-handle counters and limits |
 | [`systemd.exec`](https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html) | `LimitNOFILE` service configuration |
 | [`ss(8)`](https://man7.org/linux/man-pages/man8/ss.8.html) | Socket state inspection |
-

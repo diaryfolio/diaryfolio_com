@@ -2,6 +2,7 @@
 title: "Why a container is not a virtual machine"
 date: "2026-09-13T09:00:00.000Z"
 legacy_url: "/2026/09/why-containers-are-not-virtual-machines.html"
+research_id: "AR_1018"
 author: "df"
 labels:
   - "Linux"
@@ -169,4 +170,3 @@ The useful question is not "is Docker broken?" It is "which kernel view, resourc
 | [Linux cgroup v2](https://docs.kernel.org/admin-guide/cgroup-v2.html) | Resource controller behaviour |
 | [Linux capabilities](https://man7.org/linux/man-pages/man7/capabilities.7.html) | Split root privileges |
 | [Docker seccomp profile](https://docs.docker.com/engine/security/seccomp/) | Default system-call filtering |
-

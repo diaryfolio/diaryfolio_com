@@ -2,6 +2,7 @@
 title: "Recover a lost Git commit with reflog and fsck"
 date: "2026-09-13T09:10:00.000Z"
 legacy_url: "/2026/09/recover-lost-git-commits-reflog-fsck.html"
+research_id: "AR_1019"
 author: "df"
 labels:
   - "Git"
@@ -178,4 +179,3 @@ Editor history, filesystem snapshots, backups, CI checkouts and colleagues' clon
 | [`git reflog`](https://git-scm.com/docs/git-reflog) | Reference history and expiry controls |
 | [`git fsck`](https://git-scm.com/docs/git-fsck) | Object connectivity and unreachable objects |
 | [Git maintenance and data recovery](https://git-scm.com/book/en/v2/Git-Internals-Maintenance-and-Data-Recovery) | Worked recovery examples |
-
