@@ -2,6 +2,7 @@
 title: "What passkeys actually store and send"
 date: "2026-09-13T09:30:00.000Z"
 legacy_url: "/2026/09/passkeys-webauthn-how-they-work.html"
+research_id: "AR_1021"
 author: "df"
 labels:
   - "Security"
@@ -158,4 +159,3 @@ The exact representation depends on the WebAuthn library. Credential IDs are bin
 | [WebAuthn Level 2 Recommendation](https://www.w3.org/TR/webauthn-2/) | Stable W3C recommendation |
 | [FIDO Alliance passkeys](https://fidoalliance.org/passkeys/) | Deployment and ecosystem overview |
 | [Credential Management API](https://www.w3.org/TR/credential-management-1/) | Browser credential interface context |
-

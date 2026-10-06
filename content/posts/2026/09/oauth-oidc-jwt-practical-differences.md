@@ -2,6 +2,7 @@
 title: "OAuth, OpenID Connect and JWT are not the same thing"
 date: "2026-09-13T09:20:00.000Z"
 legacy_url: "/2026/09/oauth-oidc-jwt-practical-differences.html"
+research_id: "AR_1020"
 author: "df"
 labels:
   - "Security"
@@ -144,4 +145,3 @@ For many server-rendered applications, a secure HTTP-only application session is
 | [OpenID Connect Core](https://openid.net/specs/openid-connect-core-1_0.html) | ID tokens and authentication flow |
 | [JWT, RFC 7519](https://www.rfc-editor.org/rfc/rfc7519.html) | Claims format |
 | [JWT best current practice, RFC 8725](https://www.rfc-editor.org/rfc/rfc8725.html) | Validation and algorithm safeguards |
-
