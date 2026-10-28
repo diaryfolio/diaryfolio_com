@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Private video search pipeline</title>
+  <desc id="desc">A video timeline provides selected frames to a local visual model, which creates time-coded records for a private search index.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#edf2f4" />
+      <stop offset="1" stop-color="#dcebef" />
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10Z" fill="#087286" />
+    </marker>
+  </defs>
+  <rect width="960" height="540" rx="26" fill="url(#bg)" />
+  <text x="64" y="76" fill="#18232c" font-family="system-ui, sans-serif" font-size="34" font-weight="750">Private video search</text>
+  <text x="64" y="112" fill="#455760" font-family="system-ui, sans-serif" font-size="20">Frames become time-coded, access-controlled search records</text>
+
+  <g transform="translate(64 166)">
+    <rect width="290" height="250" rx="18" fill="#18232c" />
+    <rect x="22" y="24" width="246" height="144" rx="10" fill="#2e424d" stroke="#6b818b" />
+    <path d="M122 65 122 127 178 96Z" fill="#f6f8f9" />
+    <g fill="#9eb2bb">
+      <rect x="22" y="190" width="50" height="36" rx="5" />
+      <rect x="82" y="190" width="50" height="36" rx="5" />
+      <rect x="142" y="190" width="50" height="36" rx="5" />
+      <rect x="202" y="190" width="66" height="36" rx="5" />
+    </g>
+    <rect x="82" y="190" width="50" height="36" rx="5" fill="#26a3b5" />
+    <text x="145" y="246" text-anchor="middle" fill="#f6f8f9" font-family="ui-monospace, monospace" font-size="15">00:03:03.400</text>
+  </g>
+
+  <path d="M378 290H457" fill="none" stroke="#087286" stroke-width="7" stroke-linecap="round" marker-end="url(#arrow)" />
+
+  <g transform="translate(476 172)">
+    <rect width="174" height="232" rx="20" fill="#fff" stroke="#087286" stroke-width="3" />
+    <circle cx="87" cy="70" r="42" fill="#e5f2f4" stroke="#087286" stroke-width="3" />
+    <path d="M60 72 76 57 91 76 111 50 120 87H55Z" fill="#26a3b5" />
+    <circle cx="104" cy="53" r="7" fill="#b44a35" />
+    <text x="87" y="139" text-anchor="middle" fill="#18232c" font-family="system-ui, sans-serif" font-size="21" font-weight="750">LFM3-VL</text>
+    <text x="87" y="168" text-anchor="middle" fill="#455760" font-family="system-ui, sans-serif" font-size="16">visual metadata</text>
+    <g fill="#087286">
+      <rect x="34" y="190" width="33" height="8" rx="4" />
+      <rect x="75" y="190" width="65" height="8" rx="4" />
+      <rect x="51" y="208" width="89" height="8" rx="4" />
+    </g>
+  </g>
+
+  <path d="M674 290H741" fill="none" stroke="#087286" stroke-width="7" stroke-linecap="round" marker-end="url(#arrow)" />
+
+  <g transform="translate(760 194)">
+    <rect width="142" height="188" rx="18" fill="#fff" stroke="#b8c7cd" stroke-width="2" />
+    <circle cx="45" cy="48" r="18" fill="none" stroke="#087286" stroke-width="6" />
+    <path d="M58 61 73 76" stroke="#087286" stroke-width="6" stroke-linecap="round" />
+    <text x="26" y="111" fill="#18232c" font-family="system-ui, sans-serif" font-size="19" font-weight="750">Search</text>
+    <rect x="25" y="128" width="92" height="10" rx="5" fill="#d7e1e5" />
+    <rect x="25" y="149" width="70" height="10" rx="5" fill="#26a3b5" />
+  </g>
+
+  <g transform="translate(64 456)" font-family="ui-monospace, monospace" font-size="15" fill="#455760">
+    <rect width="164" height="34" rx="17" fill="#fff" stroke="#b8c7cd" />
+    <text x="82" y="22" text-anchor="middle">local inference</text>
+    <rect x="178" width="170" height="34" rx="17" fill="#fff" stroke="#b8c7cd" />
+    <text x="263" y="22" text-anchor="middle">hybrid retrieval</text>
+    <rect x="362" width="148" height="34" rx="17" fill="#fff" stroke="#b8c7cd" />
+    <text x="436" y="22" text-anchor="middle">source ACLs</text>
+  </g>
+</svg>
